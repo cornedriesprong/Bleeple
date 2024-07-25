@@ -14,6 +14,8 @@
 		971102862C516E0500A649F3 /* BleepleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971102852C516E0500A649F3 /* BleepleTests.swift */; };
 		971102902C516E0500A649F3 /* BleepleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9711028F2C516E0500A649F3 /* BleepleUITests.swift */; };
 		971102922C516E0500A649F3 /* BleepleUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971102912C516E0500A649F3 /* BleepleUITestsLaunchTests.swift */; };
+		971102A02C516F1C00A649F3 /* libcp3_dsp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9711029F2C516F1C00A649F3 /* libcp3_dsp.a */; };
+		971102A72C5170C300A649F3 /* AudioEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971102A62C5170C300A649F3 /* AudioEngine.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +47,10 @@
 		9711028B2C516E0500A649F3 /* BleepleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BleepleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9711028F2C516E0500A649F3 /* BleepleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleepleUITests.swift; sourceTree = "<group>"; };
 		971102912C516E0500A649F3 /* BleepleUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleepleUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		9711029F2C516F1C00A649F3 /* libcp3_dsp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcp3_dsp.a; path = "cp3-dsp-rs/target/debug/libcp3_dsp.a"; sourceTree = "<group>"; };
+		971102A12C51706B00A649F3 /* cp3_dsp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = cp3_dsp.h; path = "cp3-dsp-rs/cp3_dsp.h"; sourceTree = SOURCE_ROOT; };
+		971102A22C51707400A649F3 /* Bleeple-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bleeple-Bridging-Header.h"; sourceTree = "<group>"; };
+		971102A62C5170C300A649F3 /* AudioEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioEngine.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				971102A02C516F1C00A649F3 /* libcp3_dsp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,6 +86,7 @@
 				971102842C516E0500A649F3 /* BleepleTests */,
 				9711028E2C516E0500A649F3 /* BleepleUITests */,
 				971102712C516E0300A649F3 /* Products */,
+				9711029E2C516F1C00A649F3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -97,9 +105,12 @@
 			children = (
 				971102732C516E0300A649F3 /* BleepleApp.swift */,
 				971102752C516E0300A649F3 /* ContentView.swift */,
+				971102A62C5170C300A649F3 /* AudioEngine.swift */,
+				971102A12C51706B00A649F3 /* cp3_dsp.h */,
 				971102772C516E0400A649F3 /* Assets.xcassets */,
 				971102792C516E0400A649F3 /* Bleeple.entitlements */,
 				9711027A2C516E0400A649F3 /* Preview Content */,
+				971102A22C51707400A649F3 /* Bleeple-Bridging-Header.h */,
 			);
 			path = Bleeple;
 			sourceTree = "<group>";
@@ -127,6 +138,14 @@
 				971102912C516E0500A649F3 /* BleepleUITestsLaunchTests.swift */,
 			);
 			path = BleepleUITests;
+			sourceTree = "<group>";
+		};
+		9711029E2C516F1C00A649F3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9711029F2C516F1C00A649F3 /* libcp3_dsp.a */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -197,6 +216,7 @@
 				TargetAttributes = {
 					9711026F2C516E0300A649F3 = {
 						CreatedOnToolsVersion = 15.4;
+						LastSwiftMigration = 1540;
 					};
 					971102802C516E0500A649F3 = {
 						CreatedOnToolsVersion = 15.4;
@@ -259,6 +279,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				971102A72C5170C300A649F3 /* AudioEngine.swift in Sources */,
 				971102762C516E0300A649F3 /* ContentView.swift in Sources */,
 				971102742C516E0300A649F3 /* BleepleApp.swift in Sources */,
 			);
@@ -416,6 +437,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Bleeple/Bleeple.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -437,6 +459,10 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/cp3-dsp-rs/target/debug",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 14.5;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.cp3.Bleeple;
@@ -444,6 +470,8 @@
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Bleeple/Bleeple-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -454,6 +482,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Bleeple/Bleeple.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -475,6 +504,10 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/cp3-dsp-rs/target/release",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 14.5;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.cp3.Bleeple;
@@ -482,6 +515,7 @@
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Bleeple/Bleeple-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
