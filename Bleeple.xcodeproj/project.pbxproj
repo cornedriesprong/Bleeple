@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		971102742C516E0300A649F3 /* BleepleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971102732C516E0300A649F3 /* BleepleApp.swift */; };
-		971102762C516E0300A649F3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971102752C516E0300A649F3 /* ContentView.swift */; };
+		971102762C516E0300A649F3 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971102752C516E0300A649F3 /* MainView.swift */; };
 		971102782C516E0400A649F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 971102772C516E0400A649F3 /* Assets.xcassets */; };
 		9711027C2C516E0400A649F3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9711027B2C516E0400A649F3 /* Preview Assets.xcassets */; };
 		971102862C516E0500A649F3 /* BleepleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971102852C516E0500A649F3 /* BleepleTests.swift */; };
@@ -16,6 +16,10 @@
 		971102922C516E0500A649F3 /* BleepleUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971102912C516E0500A649F3 /* BleepleUITestsLaunchTests.swift */; };
 		971102A02C516F1C00A649F3 /* libcp3_dsp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9711029F2C516F1C00A649F3 /* libcp3_dsp.a */; };
 		971102A72C5170C300A649F3 /* AudioEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971102A62C5170C300A649F3 /* AudioEngine.swift */; };
+		97CA19FE2C648A9C006BD4E8 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CA19FD2C648A9C006BD4E8 /* MainViewModel.swift */; };
+		97CA1A002C648C9B006BD4E8 /* ColorTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CA19FF2C648C9B006BD4E8 /* ColorTheme.swift */; };
+		97CA1A022C648CB6006BD4E8 /* TopButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CA1A012C648CB6006BD4E8 /* TopButton.swift */; };
+		97CA1A042C648CCE006BD4E8 /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CA1A032C648CCE006BD4E8 /* CellView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,7 +42,7 @@
 /* Begin PBXFileReference section */
 		971102702C516E0300A649F3 /* Bleeple.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bleeple.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		971102732C516E0300A649F3 /* BleepleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleepleApp.swift; sourceTree = "<group>"; };
-		971102752C516E0300A649F3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		971102752C516E0300A649F3 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		971102772C516E0400A649F3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		971102792C516E0400A649F3 /* Bleeple.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Bleeple.entitlements; sourceTree = "<group>"; };
 		9711027B2C516E0400A649F3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -51,6 +55,10 @@
 		971102A12C51706B00A649F3 /* cp3_dsp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = cp3_dsp.h; path = "cp3-dsp-rs/cp3_dsp.h"; sourceTree = SOURCE_ROOT; };
 		971102A22C51707400A649F3 /* Bleeple-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bleeple-Bridging-Header.h"; sourceTree = "<group>"; };
 		971102A62C5170C300A649F3 /* AudioEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioEngine.swift; sourceTree = "<group>"; };
+		97CA19FD2C648A9C006BD4E8 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		97CA19FF2C648C9B006BD4E8 /* ColorTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTheme.swift; sourceTree = "<group>"; };
+		97CA1A012C648CB6006BD4E8 /* TopButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopButton.swift; sourceTree = "<group>"; };
+		97CA1A032C648CCE006BD4E8 /* CellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,8 +112,12 @@
 			isa = PBXGroup;
 			children = (
 				971102732C516E0300A649F3 /* BleepleApp.swift */,
-				971102752C516E0300A649F3 /* ContentView.swift */,
+				971102752C516E0300A649F3 /* MainView.swift */,
+				97CA1A012C648CB6006BD4E8 /* TopButton.swift */,
+				97CA1A032C648CCE006BD4E8 /* CellView.swift */,
+				97CA19FD2C648A9C006BD4E8 /* MainViewModel.swift */,
 				971102A62C5170C300A649F3 /* AudioEngine.swift */,
+				97CA19FF2C648C9B006BD4E8 /* ColorTheme.swift */,
 				971102A12C51706B00A649F3 /* cp3_dsp.h */,
 				971102772C516E0400A649F3 /* Assets.xcassets */,
 				971102792C516E0400A649F3 /* Bleeple.entitlements */,
@@ -280,8 +292,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				971102A72C5170C300A649F3 /* AudioEngine.swift in Sources */,
-				971102762C516E0300A649F3 /* ContentView.swift in Sources */,
+				97CA1A002C648C9B006BD4E8 /* ColorTheme.swift in Sources */,
+				971102762C516E0300A649F3 /* MainView.swift in Sources */,
 				971102742C516E0300A649F3 /* BleepleApp.swift in Sources */,
+				97CA19FE2C648A9C006BD4E8 /* MainViewModel.swift in Sources */,
+				97CA1A022C648CB6006BD4E8 /* TopButton.swift in Sources */,
+				97CA1A042C648CCE006BD4E8 /* CellView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
