@@ -12,13 +12,9 @@ struct MainView: View {
     @State private var viewModel = ViewModel()
     @State private var isPlaying = false
 
-    private let engine = AudioEngine()
-    private let major = [0, 2, 4, 5, 7, 9, 11, 12]
-    
     var topBar: some View {
         HStack(spacing: 22) {
             TopButton(imageName: "clear") {
-                engine.clearEvents()
                 viewModel.clear()
             }
             .keyboardShortcut("c", modifiers: [.command])
@@ -82,23 +78,24 @@ struct MainView: View {
     }
     
     var grid: some View {
-        Grid(horizontalSpacing: 1, verticalSpacing: 1) {
-            ForEach(viewModel.grid.indices, id: \.self) { row in
-                GridRow {
-                    ForEach(viewModel.grid[row].indices, id: \.self) { column in
-                        CellView(isActive: $viewModel.grid[row][column])
-                    }
-                }
-            }
-        }
-        .onChange(of: viewModel.grid) { _, _ in
-            engine.clearEvents()
-            for (x, row) in viewModel.grid.enumerated() {
-                for (y, isOn) in row.enumerated() where isOn {
-                    engine.addEvent(step: y, pitch: major.reversed()[x] + 52)
-                }
-            }
-        }
+        PianoRoll(events: $viewModel.events)
+//        Grid(horizontalSpacing: 1, verticalSpacing: 1) {
+//            ForEach(viewModel.events.indices, id: \.self) { row in
+//                GridRow {
+//                    ForEach(viewModel.events[row].indices, id: \.self) { column in
+//                        CellView(isActive: $viewModel.events[row][column] != nil)
+//                    }
+//                }
+//            }
+//        }
+//        .onChange(of: viewModel.events) { _, _ in
+//            engine.clearEvents()
+//            for (x, row) in viewModel.events.enumerated() {
+//                for (y, eventOrNil) in row.enumerated() where eventOrNil != nil {
+//                    engine.addEvent(step: y, pitch: major.reversed()[x] + 52)
+//                }
+//            }
+//        }
     }
     
     var body: some View {

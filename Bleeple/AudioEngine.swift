@@ -13,7 +13,7 @@ final class AudioEngine {
     // MARK: - Properties
     
     private let engine: OpaquePointer
-    var audioEngine: AVAudioEngine
+    var audioEngine = AVAudioEngine()
     var sourceNode: AVAudioSourceNode?
     var format: AVAudioFormat
     
@@ -21,7 +21,6 @@ final class AudioEngine {
 
     init() {
         engine = engine_init()
-        audioEngine = AVAudioEngine()
         format = audioEngine.outputNode.outputFormat(forBus: 0)
 
         setupAudioEngine()

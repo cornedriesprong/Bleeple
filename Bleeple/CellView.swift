@@ -8,11 +8,12 @@
 import SwiftUI
 
 struct CellView: View {
+    @Environment(\.color) private var color
     @Binding var isActive: Bool
     
     var body: some View {
         Rectangle()
-            .foregroundStyle(.red)
+            .foregroundStyle(color)
             .opacity(isActive ? 1 : 0.1)
             .onTapGesture {
                 isActive.toggle()
