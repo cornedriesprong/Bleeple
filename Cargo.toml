@@ -1,0 +1,4 @@
+[workspace]
+members = [
+  "cp3-dsp"
+]

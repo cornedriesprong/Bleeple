@@ -14,12 +14,14 @@
 		971102862C516E0500A649F3 /* BleepleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971102852C516E0500A649F3 /* BleepleTests.swift */; };
 		971102902C516E0500A649F3 /* BleepleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9711028F2C516E0500A649F3 /* BleepleUITests.swift */; };
 		971102922C516E0500A649F3 /* BleepleUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971102912C516E0500A649F3 /* BleepleUITestsLaunchTests.swift */; };
-		971102A02C516F1C00A649F3 /* libcp3_dsp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9711029F2C516F1C00A649F3 /* libcp3_dsp.a */; };
 		971102A72C5170C300A649F3 /* AudioEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971102A62C5170C300A649F3 /* AudioEngine.swift */; };
-		97CA19FE2C648A9C006BD4E8 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CA19FD2C648A9C006BD4E8 /* MainViewModel.swift */; };
+		973E7E8B2C6C90DF0004ECCB /* libcp3_dsp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 973E7E8A2C6C90DF0004ECCB /* libcp3_dsp.a */; };
+		97CA19FE2C648A9C006BD4E8 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CA19FD2C648A9C006BD4E8 /* ViewModel.swift */; };
 		97CA1A002C648C9B006BD4E8 /* ColorTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CA19FF2C648C9B006BD4E8 /* ColorTheme.swift */; };
 		97CA1A022C648CB6006BD4E8 /* TopButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CA1A012C648CB6006BD4E8 /* TopButton.swift */; };
 		97CA1A042C648CCE006BD4E8 /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CA1A032C648CCE006BD4E8 /* CellView.swift */; };
+		97CA1A062C648EBB006BD4E8 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CA1A052C648EBB006BD4E8 /* Event.swift */; };
+		97CA1A082C649423006BD4E8 /* PianoRoll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CA1A072C649423006BD4E8 /* PianoRoll.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,14 +53,16 @@
 		9711028B2C516E0500A649F3 /* BleepleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BleepleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9711028F2C516E0500A649F3 /* BleepleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleepleUITests.swift; sourceTree = "<group>"; };
 		971102912C516E0500A649F3 /* BleepleUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleepleUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		9711029F2C516F1C00A649F3 /* libcp3_dsp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcp3_dsp.a; path = "cp3-dsp-rs/target/debug/libcp3_dsp.a"; sourceTree = "<group>"; };
-		971102A12C51706B00A649F3 /* cp3_dsp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = cp3_dsp.h; path = "cp3-dsp-rs/cp3_dsp.h"; sourceTree = SOURCE_ROOT; };
 		971102A22C51707400A649F3 /* Bleeple-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bleeple-Bridging-Header.h"; sourceTree = "<group>"; };
 		971102A62C5170C300A649F3 /* AudioEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioEngine.swift; sourceTree = "<group>"; };
-		97CA19FD2C648A9C006BD4E8 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		973E7E892C6C90630004ECCB /* cp3_dsp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = cp3_dsp.h; path = "cp3-dsp/cp3_dsp.h"; sourceTree = SOURCE_ROOT; };
+		973E7E8A2C6C90DF0004ECCB /* libcp3_dsp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcp3_dsp.a; path = target/debug/libcp3_dsp.a; sourceTree = "<group>"; };
+		97CA19FD2C648A9C006BD4E8 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		97CA19FF2C648C9B006BD4E8 /* ColorTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTheme.swift; sourceTree = "<group>"; };
 		97CA1A012C648CB6006BD4E8 /* TopButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopButton.swift; sourceTree = "<group>"; };
 		97CA1A032C648CCE006BD4E8 /* CellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellView.swift; sourceTree = "<group>"; };
+		97CA1A052C648EBB006BD4E8 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		97CA1A072C649423006BD4E8 /* PianoRoll.swift */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.swift; path = PianoRoll.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,7 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				971102A02C516F1C00A649F3 /* libcp3_dsp.a in Frameworks */,
+				973E7E8B2C6C90DF0004ECCB /* libcp3_dsp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -113,12 +117,14 @@
 			children = (
 				971102732C516E0300A649F3 /* BleepleApp.swift */,
 				971102752C516E0300A649F3 /* MainView.swift */,
+				97CA1A072C649423006BD4E8 /* PianoRoll.swift */,
 				97CA1A012C648CB6006BD4E8 /* TopButton.swift */,
 				97CA1A032C648CCE006BD4E8 /* CellView.swift */,
-				97CA19FD2C648A9C006BD4E8 /* MainViewModel.swift */,
+				97CA19FD2C648A9C006BD4E8 /* ViewModel.swift */,
 				971102A62C5170C300A649F3 /* AudioEngine.swift */,
 				97CA19FF2C648C9B006BD4E8 /* ColorTheme.swift */,
-				971102A12C51706B00A649F3 /* cp3_dsp.h */,
+				97CA1A052C648EBB006BD4E8 /* Event.swift */,
+				973E7E892C6C90630004ECCB /* cp3_dsp.h */,
 				971102772C516E0400A649F3 /* Assets.xcassets */,
 				971102792C516E0400A649F3 /* Bleeple.entitlements */,
 				9711027A2C516E0400A649F3 /* Preview Content */,
@@ -155,7 +161,7 @@
 		9711029E2C516F1C00A649F3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				9711029F2C516F1C00A649F3 /* libcp3_dsp.a */,
+				973E7E8A2C6C90DF0004ECCB /* libcp3_dsp.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -167,6 +173,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 971102952C516E0500A649F3 /* Build configuration list for PBXNativeTarget "Bleeple" */;
 			buildPhases = (
+				973E7E882C6C8C920004ECCB /* Build Rust library */,
 				9711026C2C516E0300A649F3 /* Sources */,
 				9711026D2C516E0300A649F3 /* Frameworks */,
 				9711026E2C516E0300A649F3 /* Resources */,
@@ -286,17 +293,40 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		973E7E882C6C8C920004ECCB /* Build Rust library */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Build Rust library";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/zsh\n\n# Ensure the PATH includes the directory where cbindgen is installed\nexport PATH=\"/opt/homebrew/bin:$HOME/.cargo/bin:$PATH\"\n\n# Run the compile-library.sh script\necho \"Running compile-library.sh script...\"\nzsh /${PROJECT_DIR}/bin/compile-library.sh cp3-dsp $buildvariant\n\n# Navigate to the cp3-dsp directory\necho \"Changing directory to cp3-dsp...\"\ncd /${PROJECT_DIR}/cp3-dsp || { echo \"Failed to change directory to cp3-dsp\"; exit 1; }\n\n# Ensure Cargo.toml exists\nif [ ! -f Cargo.toml ]; then\n  echo \"Cargo.toml not found in cp3-dsp directory\"\n  exit 1\nfi\n\n# Run cargo metadata to check if the Cargo.toml is valid\necho \"Running cargo metadata...\"\ncargo metadata || { echo \"cargo metadata failed\"; exit 1; }\n\n# Ensure cbindgen.toml exists\nif [ ! -f cbindgen.toml ]; then\n  echo \"cbindgen.toml not found in cp3-dsp directory\"\n  exit 1\nfi\n\n# Run cbindgen to generate the header file\necho \"Running cbindgen...\"\ncbindgen --config cbindgen.toml --output cp3_dsp.h || { echo \"cbindgen failed\"; exit 1; }\n\necho \"cbindgen completed successfully\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		9711026C2C516E0300A649F3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				97CA1A062C648EBB006BD4E8 /* Event.swift in Sources */,
 				971102A72C5170C300A649F3 /* AudioEngine.swift in Sources */,
 				97CA1A002C648C9B006BD4E8 /* ColorTheme.swift in Sources */,
 				971102762C516E0300A649F3 /* MainView.swift in Sources */,
 				971102742C516E0300A649F3 /* BleepleApp.swift in Sources */,
-				97CA19FE2C648A9C006BD4E8 /* MainViewModel.swift in Sources */,
+				97CA19FE2C648A9C006BD4E8 /* ViewModel.swift in Sources */,
 				97CA1A022C648CB6006BD4E8 /* TopButton.swift in Sources */,
+				97CA1A082C649423006BD4E8 /* PianoRoll.swift in Sources */,
 				97CA1A042C648CCE006BD4E8 /* CellView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -461,6 +491,7 @@
 				DEVELOPMENT_TEAM = 5GWBH83EBX;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -477,8 +508,11 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/cp3-dsp-rs/target/debug",
+					"$(PROJECT_DIR)/target/debug",
 				);
+				"LIBRARY_SEARCH_PATHS[sdk=iphoneos*][arch=arm64]" = "$(PROJECT_DIR)/target/aarch64-apple-ios/debug";
+				"LIBRARY_SEARCH_PATHS[sdk=iphonesimulator*][arch=arm64]" = "$(PROJECT_DIR)/target/aarch64-apple-ios-sim/debug";
+				"LIBRARY_SEARCH_PATHS[sdk=iphonesimulator*][arch=x86_64]" = "$(PROJECT_DIR)/target/x86_64-apple-ios/debug";
 				MACOSX_DEPLOYMENT_TARGET = 14.5;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.cp3.Bleeple;
@@ -490,6 +524,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				buildvariant = debug;
 			};
 			name = Debug;
 		};
@@ -506,6 +541,7 @@
 				DEVELOPMENT_TEAM = 5GWBH83EBX;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -520,10 +556,10 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/cp3-dsp-rs/target/release",
-				);
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/target/debug";
+				"LIBRARY_SEARCH_PATHS[sdk=iphoneos*][arch=arm64]" = "$(PROJECT_DIR)/target/aarch64-apple-ios/release";
+				"LIBRARY_SEARCH_PATHS[sdk=iphonesimulator*][arch=arm64]" = "$(PROJECT_DIR)/target/aarch64-apple-ios-sim/release";
+				"LIBRARY_SEARCH_PATHS[sdk=iphonesimulator*][arch=x86_64]" = "$(PROJECT_DIR)/target/x86_64-apple-ios/release";
 				MACOSX_DEPLOYMENT_TARGET = 14.5;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.cp3.Bleeple;
@@ -534,6 +570,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "Bleeple/Bleeple-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				buildvariant = release;
 			};
 			name = Release;
 		};
