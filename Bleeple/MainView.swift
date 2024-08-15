@@ -8,9 +8,15 @@
 import SwiftUI
 
 struct MainView: View {
+    
+    enum Mode: String, CaseIterable {
+        case grid, xy
+    }
+    
     @Environment(\.color) private var color
     @State private var viewModel = ViewModel()
     @State private var isPlaying = false
+    @State private var mode: Mode = .xy
 
     var topBar: some View {
         HStack(spacing: 22) {
@@ -48,6 +54,9 @@ struct MainView: View {
                         .fontDesign(.monospaced)
                         .frame(width: 66, alignment: .leading)
                 }
+                .onChange(of: viewModel.damping) { _, newValue in
+                    viewModel.setParameter(.cutoff, value: newValue)
+                }
                 .tint(color)
                 
                 Slider(value: $viewModel.delay) {
@@ -56,12 +65,18 @@ struct MainView: View {
                         .frame(width: 66, alignment: .leading)
                 }
                 .tint(color)
+                .onChange(of: viewModel.delay) { _, newValue in
+//                    viewModel.setParameter(.cutoff, value: newValue)
+                }
             }
             HStack(spacing: 66) {
                 Slider(value: $viewModel.tone) {
                     Text("tone")
                         .fontDesign(.monospaced)
                         .frame(width: 66, alignment: .leading)
+                }
+                .onChange(of: viewModel.tone) { _, newValue in
+                    viewModel.setParameter(.q, value: newValue)
                 }
                 .tint(color)
                 
@@ -79,25 +94,12 @@ struct MainView: View {
     
     var grid: some View {
         PianoRoll(events: $viewModel.events)
-//        Grid(horizontalSpacing: 1, verticalSpacing: 1) {
-//            ForEach(viewModel.events.indices, id: \.self) { row in
-//                GridRow {
-//                    ForEach(viewModel.events[row].indices, id: \.self) { column in
-//                        CellView(isActive: $viewModel.events[row][column] != nil)
-//                    }
-//                }
-//            }
-//        }
-//        .onChange(of: viewModel.events) { _, _ in
-//            engine.clearEvents()
-//            for (x, row) in viewModel.events.enumerated() {
-//                for (y, eventOrNil) in row.enumerated() where eventOrNil != nil {
-//                    engine.addEvent(step: y, pitch: major.reversed()[x] + 52)
-//                }
-//            }
-//        }
     }
     
+    var xy: some View {
+        XYPad()
+    }
+
     var body: some View {
         ZStack {
             VStack {
@@ -105,7 +107,24 @@ struct MainView: View {
                 
                 parameterSliders
                 
-                grid
+                Picker(selection: $mode) {
+                    ForEach(Mode.allCases, id: \.self) {
+                        Text($0.rawValue)
+                    }
+                } label: {
+                    Text("mode")
+                        .fontDesign(.monospaced)
+                }
+                .pickerStyle(.segmented)
+                .padding()
+
+                
+                switch mode {
+                case .grid:
+                    grid
+                case .xy:
+                    xy
+                }
             }
         }
     }

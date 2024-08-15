@@ -12,7 +12,7 @@ final class AudioEngine {
     
     // MARK: - Properties
     
-    private let engine: OpaquePointer
+    let engine: OpaquePointer
     var audioEngine = AVAudioEngine()
     var sourceNode: AVAudioSourceNode?
     var format: AVAudioFormat
@@ -63,7 +63,7 @@ final class AudioEngine {
             let ablPointer = UnsafeMutableAudioBufferListPointer(audioBufferList)
 
             let tempo = 120.0
-            let sampleTime = Int32(timeStamp.pointee.mSampleTime)
+            let sampleTime = timeStamp.pointee.mSampleTime
 
             var l = [Float](repeating: 0.0, count: Int(frameCount))
             var r = [Float](repeating: 0.0, count: Int(frameCount))
@@ -72,7 +72,7 @@ final class AudioEngine {
                 engine,
                 &l,
                 &r,
-                sampleTime,
+                Int64(sampleTime),
                 Float(tempo),
                 Int32(frameCount)
             )

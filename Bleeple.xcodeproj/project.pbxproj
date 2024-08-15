@@ -16,6 +16,7 @@
 		971102922C516E0500A649F3 /* BleepleUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971102912C516E0500A649F3 /* BleepleUITestsLaunchTests.swift */; };
 		971102A72C5170C300A649F3 /* AudioEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971102A62C5170C300A649F3 /* AudioEngine.swift */; };
 		973E7E8B2C6C90DF0004ECCB /* libcp3_dsp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 973E7E8A2C6C90DF0004ECCB /* libcp3_dsp.a */; };
+		97C1F6D72C6E7F62007A2687 /* XYPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C1F6D62C6E7F62007A2687 /* XYPad.swift */; };
 		97CA19FE2C648A9C006BD4E8 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CA19FD2C648A9C006BD4E8 /* ViewModel.swift */; };
 		97CA1A002C648C9B006BD4E8 /* ColorTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CA19FF2C648C9B006BD4E8 /* ColorTheme.swift */; };
 		97CA1A022C648CB6006BD4E8 /* TopButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CA1A012C648CB6006BD4E8 /* TopButton.swift */; };
@@ -57,6 +58,7 @@
 		971102A62C5170C300A649F3 /* AudioEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioEngine.swift; sourceTree = "<group>"; };
 		973E7E892C6C90630004ECCB /* cp3_dsp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = cp3_dsp.h; path = "cp3-dsp/cp3_dsp.h"; sourceTree = SOURCE_ROOT; };
 		973E7E8A2C6C90DF0004ECCB /* libcp3_dsp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcp3_dsp.a; path = target/debug/libcp3_dsp.a; sourceTree = "<group>"; };
+		97C1F6D62C6E7F62007A2687 /* XYPad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XYPad.swift; sourceTree = "<group>"; };
 		97CA19FD2C648A9C006BD4E8 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		97CA19FF2C648C9B006BD4E8 /* ColorTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTheme.swift; sourceTree = "<group>"; };
 		97CA1A012C648CB6006BD4E8 /* TopButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopButton.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 			children = (
 				971102732C516E0300A649F3 /* BleepleApp.swift */,
 				971102752C516E0300A649F3 /* MainView.swift */,
+				97C1F6D62C6E7F62007A2687 /* XYPad.swift */,
 				97CA1A072C649423006BD4E8 /* PianoRoll.swift */,
 				97CA1A012C648CB6006BD4E8 /* TopButton.swift */,
 				97CA1A032C648CCE006BD4E8 /* CellView.swift */,
@@ -325,6 +328,7 @@
 				971102762C516E0300A649F3 /* MainView.swift in Sources */,
 				971102742C516E0300A649F3 /* BleepleApp.swift in Sources */,
 				97CA19FE2C648A9C006BD4E8 /* ViewModel.swift in Sources */,
+				97C1F6D72C6E7F62007A2687 /* XYPad.swift in Sources */,
 				97CA1A022C648CB6006BD4E8 /* TopButton.swift in Sources */,
 				97CA1A082C649423006BD4E8 /* PianoRoll.swift in Sources */,
 				97CA1A042C648CCE006BD4E8 /* CellView.swift in Sources */,
