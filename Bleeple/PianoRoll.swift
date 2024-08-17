@@ -66,13 +66,13 @@ struct EventView: View {
    var body: some View {
       // While dragging, show where the note will go.
       if offset != CGSize.zero {
-          Rectangle()
-              .foregroundColor(color.opacity(0.2))
-              .frame(width: gridSize.width * event.length,
-                     height: gridSize.height)
-              .offset(eventOffset(event: event))
-              .blendMode(.luminosity)
-              .zIndex(-1)
+         Rectangle()
+            .foregroundColor(color.opacity(0.2))
+            .frame(width: gridSize.width * event.duration,
+                   height: gridSize.height)
+            .offset(eventOffset(event: event))
+            .blendMode(.luminosity)
+            .zIndex(-1)
       }
 
       // Set the minimum distance so a note drag will override
@@ -108,40 +108,40 @@ struct EventView: View {
                lengthOffset: value.translation.width
             )
          }
-      
-        ZStack(alignment: .trailing) {
-            ZStack(alignment: .leading) {
-                Rectangle()
-                    .foregroundColor(color.opacity((hovering || offset != .zero || lengthOffset != 0) ? 1.0 : 0.8))
-            }
+
+      ZStack(alignment: .trailing) {
+         ZStack(alignment: .leading) {
             Rectangle()
-                .foregroundColor(.black)
-                .padding(4)
-                .frame(width: 10)
-        }
-        .onHover { over in hovering = over }
-        .padding(1) // so we can see consecutive notes
-        .frame(width: max(gridSize.width, gridSize.width * event.length + lengthOffset),
-               height: gridSize.height)
-        .offset(eventOffset(event: startEvent ?? event, dragOffset: offset))
-        .gesture(dragGesture)
-        .animation(.easeInOut(duration: 0.2), value: hovering)
-        .animation(.easeOut(duration: 0.2), value: startEvent)
+               .foregroundColor(color.opacity((hovering || offset != .zero || lengthOffset != 0) ? 1.0 : 0.8))
+         }
+         Rectangle()
+            .foregroundColor(.black)
+            .padding(4)
+            .frame(width: 10)
+      }
+      .onHover { over in hovering = over }
+      .padding(1) // so we can see consecutive notes
+      .frame(width: max(gridSize.width, gridSize.width * event.duration + lengthOffset),
+             height: gridSize.height)
+      .offset(eventOffset(event: startEvent ?? event, dragOffset: offset))
+      .gesture(dragGesture)
+      .animation(.easeInOut(duration: 0.2), value: hovering)
+      .animation(.easeOut(duration: 0.2), value: startEvent)
 //        .preference(key: NoteOffsetsKey.self,
 //                    value: [NoteOffsetInfo(offset: noteOffset(note: startNote ?? note, dragOffset: offset),
 //                                           noteId: note.id)])
 
-        // Length tab at the end of the note.
-        HStack {
-            Spacer()
-            Rectangle()
-                .foregroundColor(.white.opacity(0.001))
-                .frame(width: gridSize.width * 0.5, height: gridSize.height)
-                .gesture(lengthDragGesture)
-        }
-        .frame(width: gridSize.width * event.length,
-               height: gridSize.height)
-        .offset(eventOffset(event: event, dragOffset: offset))
+      // Length tab at the end of the note.
+      HStack {
+         Spacer()
+         Rectangle()
+            .foregroundColor(.white.opacity(0.001))
+            .frame(width: gridSize.width * 0.5, height: gridSize.height)
+            .gesture(lengthDragGesture)
+      }
+      .frame(width: gridSize.width * event.duration,
+             height: gridSize.height)
+      .offset(eventOffset(event: event, dragOffset: offset))
    }
 
    func snap(event: Event, offset: CGSize, lengthOffset: Double = 0.0) -> Event {
@@ -153,10 +153,10 @@ struct EventView: View {
       e.pitch -= Int(round(offset.height / gridSize.height))
       e.pitch = max(1, e.pitch)
       e.pitch = min(height, e.pitch)
-      e.length += lengthOffset / gridSize.width
-      e.length = max(1, e.length)
-      e.length = min(Double(length), e.length)
-      e.length = min(Double(length) - e.start, e.length)
+      e.duration += lengthOffset / gridSize.width
+      e.duration = max(1, e.duration)
+      e.duration = min(Double(length), e.duration)
+      e.duration = min(Double(length) - e.start, e.duration)
 
       return e
    }

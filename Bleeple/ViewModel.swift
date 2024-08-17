@@ -108,8 +108,6 @@ extension MainView {
                 events.removeAll { $0 == event }
                 
             case .delete(let event):
-                let step = Int(event.start)
-                let pitch = major[event.pitch % major.count] + 52
                 events.append(event)
                 
             case .transaction(let commands):
@@ -122,7 +120,11 @@ extension MainView {
         private func updateEngine() {
             engine.clearEvents()
             for event in events {
-                engine.addEvent(step: Int(event.start), pitch: major[event.pitch % major.count] + 52)
+                engine.addEvent(
+                    step: Int(event.start),
+                    pitch: major[event.pitch % major.count] + 52,
+                    duration: Float(event.duration / 4.0)
+                )
             }
         }
     }
