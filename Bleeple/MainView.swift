@@ -8,15 +8,20 @@
 import SwiftUI
 
 struct MainView: View {
+    // MARK: - Types
     
     enum Mode: String, CaseIterable {
         case grid, xy
     }
     
+    // MARK: - Properties
+    
     @Environment(\.color) private var color
     @State private var viewModel = ViewModel()
     @State private var isPlaying = false
-    @State private var mode: Mode = .xy
+    @State private var mode: Mode = .grid
+    
+    // MARK: - View
 
     var topBar: some View {
         HStack(spacing: 22) {
@@ -35,11 +40,11 @@ struct MainView: View {
             .keyboardShortcut(.space)
             
             TopButton(imageName: "arrow.uturn.backward") {
-                print("undo")
+                viewModel.undo()
             }
             
             TopButton(imageName: "arrow.uturn.forward") {
-                print("redo")
+                viewModel.redo()
             }
         }
         .padding(.top)
@@ -65,7 +70,7 @@ struct MainView: View {
                         .frame(width: 66, alignment: .leading)
                 }
                 .tint(color)
-                .onChange(of: viewModel.delay) { _, newValue in
+                .onChange(of: viewModel.delay) { _, _ in
 //                    viewModel.setParameter(.cutoff, value: newValue)
                 }
             }
@@ -89,11 +94,10 @@ struct MainView: View {
             }
         }
         .padding()
-        
     }
     
     var grid: some View {
-        PianoRoll(events: $viewModel.events)
+        PianoRoll(viewModel: $viewModel)
     }
     
     var xy: some View {
@@ -118,7 +122,6 @@ struct MainView: View {
                 .pickerStyle(.segmented)
                 .padding()
 
-                
                 switch mode {
                 case .grid:
                     grid

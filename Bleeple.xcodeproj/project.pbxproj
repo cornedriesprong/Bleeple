@@ -11,11 +11,9 @@
 		971102762C516E0300A649F3 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971102752C516E0300A649F3 /* MainView.swift */; };
 		971102782C516E0400A649F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 971102772C516E0400A649F3 /* Assets.xcassets */; };
 		9711027C2C516E0400A649F3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9711027B2C516E0400A649F3 /* Preview Assets.xcassets */; };
-		971102862C516E0500A649F3 /* BleepleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971102852C516E0500A649F3 /* BleepleTests.swift */; };
-		971102902C516E0500A649F3 /* BleepleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9711028F2C516E0500A649F3 /* BleepleUITests.swift */; };
-		971102922C516E0500A649F3 /* BleepleUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971102912C516E0500A649F3 /* BleepleUITestsLaunchTests.swift */; };
 		971102A72C5170C300A649F3 /* AudioEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971102A62C5170C300A649F3 /* AudioEngine.swift */; };
 		973E7E8B2C6C90DF0004ECCB /* libcp3_dsp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 973E7E8A2C6C90DF0004ECCB /* libcp3_dsp.a */; };
+		97AA01E32C712BD400AD80B0 /* MainViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97AA01E22C712BD400AD80B0 /* MainViewModelTests.swift */; };
 		97C1F6D72C6E7F62007A2687 /* XYPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C1F6D62C6E7F62007A2687 /* XYPad.swift */; };
 		97CA19FE2C648A9C006BD4E8 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CA19FD2C648A9C006BD4E8 /* ViewModel.swift */; };
 		97CA1A002C648C9B006BD4E8 /* ColorTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CA19FF2C648C9B006BD4E8 /* ColorTheme.swift */; };
@@ -33,13 +31,6 @@
 			remoteGlobalIDString = 9711026F2C516E0300A649F3;
 			remoteInfo = Bleeple;
 		};
-		9711028C2C516E0500A649F3 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 971102682C516E0300A649F3 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 9711026F2C516E0300A649F3;
-			remoteInfo = Bleeple;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -50,14 +41,11 @@
 		971102792C516E0400A649F3 /* Bleeple.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Bleeple.entitlements; sourceTree = "<group>"; };
 		9711027B2C516E0400A649F3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		971102812C516E0500A649F3 /* BleepleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BleepleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		971102852C516E0500A649F3 /* BleepleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleepleTests.swift; sourceTree = "<group>"; };
-		9711028B2C516E0500A649F3 /* BleepleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BleepleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		9711028F2C516E0500A649F3 /* BleepleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleepleUITests.swift; sourceTree = "<group>"; };
-		971102912C516E0500A649F3 /* BleepleUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleepleUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		971102A22C51707400A649F3 /* Bleeple-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bleeple-Bridging-Header.h"; sourceTree = "<group>"; };
 		971102A62C5170C300A649F3 /* AudioEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioEngine.swift; sourceTree = "<group>"; };
 		973E7E892C6C90630004ECCB /* cp3_dsp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = cp3_dsp.h; path = "cp3-dsp/cp3_dsp.h"; sourceTree = SOURCE_ROOT; };
 		973E7E8A2C6C90DF0004ECCB /* libcp3_dsp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcp3_dsp.a; path = target/debug/libcp3_dsp.a; sourceTree = "<group>"; };
+		97AA01E22C712BD400AD80B0 /* MainViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModelTests.swift; sourceTree = "<group>"; };
 		97C1F6D62C6E7F62007A2687 /* XYPad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XYPad.swift; sourceTree = "<group>"; };
 		97CA19FD2C648A9C006BD4E8 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		97CA19FF2C648C9B006BD4E8 /* ColorTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTheme.swift; sourceTree = "<group>"; };
@@ -83,13 +71,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		971102882C516E0500A649F3 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -98,7 +79,6 @@
 			children = (
 				971102722C516E0300A649F3 /* Bleeple */,
 				971102842C516E0500A649F3 /* BleepleTests */,
-				9711028E2C516E0500A649F3 /* BleepleUITests */,
 				971102712C516E0300A649F3 /* Products */,
 				9711029E2C516F1C00A649F3 /* Frameworks */,
 			);
@@ -109,7 +89,6 @@
 			children = (
 				971102702C516E0300A649F3 /* Bleeple.app */,
 				971102812C516E0500A649F3 /* BleepleTests.xctest */,
-				9711028B2C516E0500A649F3 /* BleepleUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -147,18 +126,9 @@
 		971102842C516E0500A649F3 /* BleepleTests */ = {
 			isa = PBXGroup;
 			children = (
-				971102852C516E0500A649F3 /* BleepleTests.swift */,
+				97AA01E22C712BD400AD80B0 /* MainViewModelTests.swift */,
 			);
 			path = BleepleTests;
-			sourceTree = "<group>";
-		};
-		9711028E2C516E0500A649F3 /* BleepleUITests */ = {
-			isa = PBXGroup;
-			children = (
-				9711028F2C516E0500A649F3 /* BleepleUITests.swift */,
-				971102912C516E0500A649F3 /* BleepleUITestsLaunchTests.swift */,
-			);
-			path = BleepleUITests;
 			sourceTree = "<group>";
 		};
 		9711029E2C516F1C00A649F3 /* Frameworks */ = {
@@ -208,24 +178,6 @@
 			productReference = 971102812C516E0500A649F3 /* BleepleTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		9711028A2C516E0500A649F3 /* BleepleUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 9711029B2C516E0500A649F3 /* Build configuration list for PBXNativeTarget "BleepleUITests" */;
-			buildPhases = (
-				971102872C516E0500A649F3 /* Sources */,
-				971102882C516E0500A649F3 /* Frameworks */,
-				971102892C516E0500A649F3 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				9711028D2C516E0500A649F3 /* PBXTargetDependency */,
-			);
-			name = BleepleUITests;
-			productName = BleepleUITests;
-			productReference = 9711028B2C516E0500A649F3 /* BleepleUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -241,10 +193,6 @@
 						LastSwiftMigration = 1540;
 					};
 					971102802C516E0500A649F3 = {
-						CreatedOnToolsVersion = 15.4;
-						TestTargetID = 9711026F2C516E0300A649F3;
-					};
-					9711028A2C516E0500A649F3 = {
 						CreatedOnToolsVersion = 15.4;
 						TestTargetID = 9711026F2C516E0300A649F3;
 					};
@@ -265,7 +213,6 @@
 			targets = (
 				9711026F2C516E0300A649F3 /* Bleeple */,
 				971102802C516E0500A649F3 /* BleepleTests */,
-				9711028A2C516E0500A649F3 /* BleepleUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -281,13 +228,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		9711027F2C516E0500A649F3 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		971102892C516E0500A649F3 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -339,16 +279,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				971102862C516E0500A649F3 /* BleepleTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		971102872C516E0500A649F3 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				971102922C516E0500A649F3 /* BleepleUITestsLaunchTests.swift in Sources */,
-				971102902C516E0500A649F3 /* BleepleUITests.swift in Sources */,
+				97AA01E32C712BD400AD80B0 /* MainViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -359,11 +290,6 @@
 			isa = PBXTargetDependency;
 			target = 9711026F2C516E0300A649F3 /* Bleeple */;
 			targetProxy = 971102822C516E0500A649F3 /* PBXContainerItemProxy */;
-		};
-		9711028D2C516E0500A649F3 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 9711026F2C516E0300A649F3 /* Bleeple */;
-			targetProxy = 9711028C2C516E0500A649F3 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -624,50 +550,6 @@
 			};
 			name = Release;
 		};
-		9711029C2C516E0500A649F3 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 5GWBH83EBX;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
-				MACOSX_DEPLOYMENT_TARGET = 14.5;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = io.cp3.BleepleUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Bleeple;
-			};
-			name = Debug;
-		};
-		9711029D2C516E0500A649F3 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 5GWBH83EBX;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
-				MACOSX_DEPLOYMENT_TARGET = 14.5;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = io.cp3.BleepleUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Bleeple;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -694,15 +576,6 @@
 			buildConfigurations = (
 				971102992C516E0500A649F3 /* Debug */,
 				9711029A2C516E0500A649F3 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		9711029B2C516E0500A649F3 /* Build configuration list for PBXNativeTarget "BleepleUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				9711029C2C516E0500A649F3 /* Debug */,
-				9711029D2C516E0500A649F3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

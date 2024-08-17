@@ -171,7 +171,7 @@ struct EventView: View {
 
 struct PianoRoll: View {
    @Environment(\.color) private var color
-   @Binding var events: [Event]
+   @Binding var viewModel: MainView.ViewModel
 
    let gridSize = CGSize(width: 44, height: 44)
    let length = 16
@@ -184,7 +184,7 @@ struct PianoRoll: View {
             let step = Double(Int(location.x / gridSize.width))
             let pitch = height - Int(location.y / gridSize.height)
             let event = Event(pitch: pitch, start: step)
-            events.append(event)
+            viewModel.addEvent(event)
          }
 
          PianoRollGrid(gridSize: gridSize, width: length, height: height)
@@ -193,7 +193,7 @@ struct PianoRoll: View {
             .contentShape(Rectangle())
             .gesture(TapGesture().sequenced(before: dragGesture))
 
-         ForEach($events) { $event in
+         ForEach($viewModel.events) { $event in
             EventView(
                event: $event,
                length: length,
@@ -201,7 +201,7 @@ struct PianoRoll: View {
                gridSize: gridSize
             )
             .onTapGesture {
-               events.removeAll(where: { $0 == event })
+               viewModel.removeEvent(event)
             }
          }
       }
