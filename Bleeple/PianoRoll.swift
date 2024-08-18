@@ -60,7 +60,7 @@ struct EventView: View {
    @Binding var event: Event
    @State var hovering = false
    var length: Int
-   var height: Int
+   var pitchCount: Int
    var gridSize: CGSize
 
    var body: some View {
@@ -152,7 +152,7 @@ struct EventView: View {
       e.start = min(Double(length - 1), e.start)
       e.pitch -= Int(round(offset.height / gridSize.height))
       e.pitch = max(1, e.pitch)
-      e.pitch = min(height, e.pitch)
+      e.pitch = min(pitchCount, e.pitch)
       e.duration += lengthOffset / gridSize.width
       e.duration = max(1, e.duration)
       e.duration = min(Double(length), e.duration)
@@ -164,7 +164,7 @@ struct EventView: View {
    func eventOffset(event: Event, dragOffset: CGSize = .zero) -> CGSize {
       CGSize(
          width: gridSize.width * event.start + dragOffset.width,
-         height: gridSize.height * (8.0 - Double(event.pitch)) + dragOffset.height
+         height: gridSize.height * (Double(pitchCount) - Double(event.pitch)) + dragOffset.height
       )
    }
 }
@@ -173,21 +173,29 @@ struct PianoRoll: View {
    @Environment(\.color) private var color
    @Binding var viewModel: MainView.ViewModel
 
-   let gridSize = CGSize(width: 44, height: 44)
-   let length = 16
-   let height = 8
+   let gridSize = CGSize(width: 33, height: 33)
+   let length = 32
+   let pitchCount = Constants.pitchCount
+   
+   private var width: CGFloat {
+       CGFloat(length) * gridSize.width
+   }
+
+   private var height: CGFloat {
+       CGFloat(pitchCount) * gridSize.height
+   }
 
    var body: some View {
       ZStack(alignment: Alignment(horizontal: .leading, vertical: .top)) {
          let dragGesture = DragGesture(minimumDistance: 0).onEnded { value in
             let location = value.location
             let step = Double(Int(location.x / gridSize.width))
-            let pitch = height - Int(location.y / gridSize.height)
+            let pitch = pitchCount - Int(location.y / gridSize.height)
             let event = Event(pitch: pitch, start: step)
             viewModel.addEvent(event)
          }
 
-         PianoRollGrid(gridSize: gridSize, width: length, height: height)
+         PianoRollGrid(gridSize: gridSize, width: length, height: pitchCount)
             .stroke(lineWidth: 0.5)
             .foregroundColor(color.opacity(0.3))
             .contentShape(Rectangle())
@@ -197,7 +205,7 @@ struct PianoRoll: View {
             EventView(
                event: $event,
                length: length,
-               height: height,
+               pitchCount: pitchCount,
                gridSize: gridSize
             )
             .onTapGesture {
@@ -205,5 +213,6 @@ struct PianoRoll: View {
             }
          }
       }
+      .frame(width: width, height: height)
    }
 }

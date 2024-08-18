@@ -36,7 +36,6 @@ extension MainView {
         var reverb: Double = 0.5
         
         private let engine = AudioEngine()
-        private let major = [0, 2, 4, 5, 7, 9, 11, 12]
         private var history = [Command]()
         private var position = -1
 
@@ -88,8 +87,6 @@ extension MainView {
         private func apply(_ command: Command) {
             switch command {
             case .insert(let event):
-                let step = Int(event.start)
-                let pitch = major[event.pitch % major.count] + 52
                 events.append(event)
 
             case .delete(let event):
@@ -122,7 +119,7 @@ extension MainView {
             for event in events {
                 engine.addEvent(
                     step: Int(event.start),
-                    pitch: major[event.pitch % major.count] + 52,
+                    pitch: event.pitch,
                     duration: Float(event.duration / 4.0)
                 )
             }

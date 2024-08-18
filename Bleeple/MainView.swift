@@ -97,7 +97,18 @@ struct MainView: View {
     }
     
     var grid: some View {
-        PianoRoll(viewModel: $viewModel)
+        ScrollViewReader { proxy in
+            ScrollView([.horizontal, .vertical], showsIndicators: true) {
+                PianoRoll(viewModel: $viewModel).id("pianoRoll")
+            }
+            .onAppear {
+                // scroll to vertical center
+                DispatchQueue.main.async {
+                    proxy.scrollTo("pianoRoll", anchor: .center)
+                    proxy.scrollTo("pianoRoll", anchor: .leading)
+                }
+            }
+        }
     }
     
     var xy: some View {
