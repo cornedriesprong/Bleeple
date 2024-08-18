@@ -120,6 +120,7 @@ struct EventView: View {
             .frame(width: 10)
       }
       .onHover { over in hovering = over }
+      .border(event.selected ? Color.white : Color.clear)
       .padding(1) // so we can see consecutive notes
       .frame(width: max(gridSize.width, gridSize.width * event.duration + lengthOffset),
              height: gridSize.height)
@@ -171,18 +172,19 @@ struct EventView: View {
 
 struct PianoRoll: View {
    @Environment(\.color) private var color
+   @Environment(\.isShiftPressed) private var isShiftPressed
    @Binding var viewModel: MainView.ViewModel
 
    let gridSize = CGSize(width: 33, height: 33)
    let length = 32
    let pitchCount = Constants.pitchCount
-   
+
    private var width: CGFloat {
-       CGFloat(length) * gridSize.width
+      CGFloat(length) * gridSize.width
    }
 
    private var height: CGFloat {
-       CGFloat(pitchCount) * gridSize.height
+      CGFloat(pitchCount) * gridSize.height
    }
 
    var body: some View {
@@ -199,7 +201,10 @@ struct PianoRoll: View {
             .stroke(lineWidth: 0.5)
             .foregroundColor(color.opacity(0.3))
             .contentShape(Rectangle())
-            .gesture(TapGesture().sequenced(before: dragGesture))
+            .gesture(TapGesture(count: 2).sequenced(before: dragGesture))
+            .onTapGesture {
+               viewModel.deselectAll()
+            }
 
          ForEach($viewModel.events) { $event in
             EventView(
@@ -208,9 +213,18 @@ struct PianoRoll: View {
                pitchCount: pitchCount,
                gridSize: gridSize
             )
-            .onTapGesture {
+            .onTapGesture(count: 2) {
                viewModel.removeEvent(event)
             }
+            .simultaneousGesture(
+               TapGesture()
+                  .onEnded {
+                     if !isShiftPressed {
+                        viewModel.deselectAll()
+                     }
+                     event.selected.toggle()
+                  }
+            )
          }
       }
       .frame(width: width, height: height)

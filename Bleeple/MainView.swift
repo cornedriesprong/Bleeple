@@ -20,6 +20,7 @@ struct MainView: View {
     @State private var viewModel = ViewModel()
     @State private var isPlaying = false
     @State private var mode: Mode = .grid
+    @State private var isShiftPressed = false
     
     // MARK: - View
 
@@ -141,6 +142,26 @@ struct MainView: View {
                 }
             }
         }
+        .focusable()
+        .focusEffectDisabled()
+        .onAppear {
+            addKeyboardListeners()
+        }
+        .onDisappear {
+            removeKeyboardListeners()
+        }
+        .environment(\.isShiftPressed, isShiftPressed)
+    }
+    
+    private func addKeyboardListeners() {
+        NSEvent.addLocalMonitorForEvents(matching: [.flagsChanged]) { event in
+            isShiftPressed = event.modifierFlags.contains(.shift)
+            return event
+        }
+    }
+
+    private func removeKeyboardListeners() {
+        NSEvent.removeMonitor(self)
     }
 }
 

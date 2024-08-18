@@ -13,12 +13,14 @@ struct Event: Identifiable {
     var velocity: Int
     var start: Double
     var duration: Double
+    var selected: Bool
 
     init(pitch: Int, velocity: Int = 100, start: Double, length: Double = 1.0) {
         self.pitch = pitch
         self.velocity = velocity
         self.start = start
         self.duration = length
+        self.selected = false
     }
 }
 

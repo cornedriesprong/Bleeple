@@ -17,3 +17,14 @@ extension EnvironmentValues {
         set { self[ColorTheme.self] = newValue }
     }
 }
+
+struct ShiftPressed: EnvironmentKey {
+    static let defaultValue: Bool = false
+}
+
+extension EnvironmentValues {
+    var isShiftPressed: Bool {
+        get { self[ShiftPressed.self] }
+        set { self[ShiftPressed.self] = newValue }
+    }
+}

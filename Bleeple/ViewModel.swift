@@ -47,6 +47,12 @@ extension MainView {
             push(.delete(event: event))
         }
         
+        func deselectAll() {
+            for index in events.indices {
+                events[index].selected = false
+            }
+        }
+        
         func undo() {
             if position >= 0 {
                 let command = history[position]
