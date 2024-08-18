@@ -49,7 +49,7 @@ extension MainView {
         
         func deselectAll() {
             for index in events.indices {
-                events[index].selected = false
+                events[index].isSelected = false
             }
         }
         
@@ -68,17 +68,23 @@ extension MainView {
                 apply(command)
             }
         }
-
+        
         func clear() {
-            var commands = [Command]()
-            for event in events {
-                commands.append(.delete(event: event))
-            }
+            let selectedEvents = events.filter { $0.isSelected }
+            let eventsToDelete = selectedEvents.isEmpty ? events : selectedEvents
+            let commands: [Command] = eventsToDelete.map { .delete(event: $0) }
             push(.transaction(commands: commands))
         }
-        
+
         func setParameter(_ parameter: Parameter, value: Double) {
-//            set_param(engine.engine, UInt8(parameter.rawValue), Float(value))
+            for (index, event) in events.enumerated() where event.isSelected == true {
+                switch parameter {
+                case .cutoff:
+                    events[index].cutoff = value
+                case .q:
+                    events[index].q = value
+                }
+            }
         }
         
         // MARK: - Private methods
@@ -126,7 +132,9 @@ extension MainView {
                 engine.addEvent(
                     step: Int(event.start),
                     pitch: event.pitch,
-                    duration: Float(event.duration / 4.0)
+                    duration: Float(event.duration / 4.0),
+                    cutoff: Float(event.cutoff),
+                    q: Float(event.q)
                 )
             }
         }

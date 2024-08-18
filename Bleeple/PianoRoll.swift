@@ -120,7 +120,7 @@ struct EventView: View {
             .frame(width: 10)
       }
       .onHover { over in hovering = over }
-      .border(event.selected ? Color.white : Color.clear)
+      .border(event.isSelected ? Color.white : Color.clear)
       .padding(1) // so we can see consecutive notes
       .frame(width: max(gridSize.width, gridSize.width * event.duration + lengthOffset),
              height: gridSize.height)
@@ -222,7 +222,7 @@ struct PianoRoll: View {
                      if !isShiftPressed {
                         viewModel.deselectAll()
                      }
-                     event.selected.toggle()
+                     event.isSelected.toggle()
                   }
             )
          }
