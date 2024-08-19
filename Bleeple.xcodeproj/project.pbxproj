@@ -16,6 +16,7 @@
 		9796B3CA2C72012300E17C6A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9796B3C92C72012300E17C6A /* Constants.swift */; };
 		97AA01E32C712BD400AD80B0 /* MainViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97AA01E22C712BD400AD80B0 /* MainViewModelTests.swift */; };
 		97C1F6D72C6E7F62007A2687 /* XYPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C1F6D62C6E7F62007A2687 /* XYPad.swift */; };
+		97C2BD312C73204500EE05C8 /* TapGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C2BD302C73204500EE05C8 /* TapGrid.swift */; };
 		97CA19FE2C648A9C006BD4E8 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CA19FD2C648A9C006BD4E8 /* ViewModel.swift */; };
 		97CA1A002C648C9B006BD4E8 /* ColorTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CA19FF2C648C9B006BD4E8 /* ColorTheme.swift */; };
 		97CA1A022C648CB6006BD4E8 /* TopButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CA1A012C648CB6006BD4E8 /* TopButton.swift */; };
@@ -49,6 +50,7 @@
 		9796B3C92C72012300E17C6A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		97AA01E22C712BD400AD80B0 /* MainViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModelTests.swift; sourceTree = "<group>"; };
 		97C1F6D62C6E7F62007A2687 /* XYPad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XYPad.swift; sourceTree = "<group>"; };
+		97C2BD302C73204500EE05C8 /* TapGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapGrid.swift; sourceTree = "<group>"; };
 		97CA19FD2C648A9C006BD4E8 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		97CA19FF2C648C9B006BD4E8 /* ColorTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTheme.swift; sourceTree = "<group>"; };
 		97CA1A012C648CB6006BD4E8 /* TopButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopButton.swift; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 			children = (
 				971102732C516E0300A649F3 /* BleepleApp.swift */,
 				971102752C516E0300A649F3 /* MainView.swift */,
+				97C2BD302C73204500EE05C8 /* TapGrid.swift */,
 				97C1F6D62C6E7F62007A2687 /* XYPad.swift */,
 				97CA1A072C649423006BD4E8 /* PianoRoll.swift */,
 				9796B3C92C72012300E17C6A /* Constants.swift */,
@@ -272,6 +275,7 @@
 				971102762C516E0300A649F3 /* MainView.swift in Sources */,
 				971102742C516E0300A649F3 /* BleepleApp.swift in Sources */,
 				97CA19FE2C648A9C006BD4E8 /* ViewModel.swift in Sources */,
+				97C2BD312C73204500EE05C8 /* TapGrid.swift in Sources */,
 				97C1F6D72C6E7F62007A2687 /* XYPad.swift in Sources */,
 				97CA1A022C648CB6006BD4E8 /* TopButton.swift in Sources */,
 				97CA1A082C649423006BD4E8 /* PianoRoll.swift in Sources */,

@@ -11,7 +11,7 @@ struct MainView: View {
     // MARK: - Types
     
     enum Mode: String, CaseIterable {
-        case grid, xy
+        case roll, grid, xy
     }
     
     // MARK: - Properties
@@ -98,6 +98,10 @@ struct MainView: View {
     }
     
     var grid: some View {
+        TapGrid()
+    }
+
+    var roll: some View {
         ScrollViewReader { proxy in
             ScrollView([.horizontal, .vertical], showsIndicators: true) {
                 PianoRoll(viewModel: $viewModel).id("pianoRoll")
@@ -123,20 +127,20 @@ struct MainView: View {
                 
                 parameterSliders
                 
-                Picker(selection: $mode) {
+                Picker("Mode", selection: $mode) {
                     ForEach(Mode.allCases, id: \.self) {
                         Text($0.rawValue)
                     }
-                } label: {
-                    Text("mode")
-                        .fontDesign(.monospaced)
                 }
                 .pickerStyle(.segmented)
+                .labelsHidden()
                 .padding()
 
                 switch mode {
                 case .grid:
                     grid
+                case .roll:
+                    roll
                 case .xy:
                     xy
                 }
