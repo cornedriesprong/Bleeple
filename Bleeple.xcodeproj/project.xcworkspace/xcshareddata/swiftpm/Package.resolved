@@ -1,0 +1,15 @@
+{
+  "originHash" : "2b82d6965a17da7aea9bb881f4976eb610e3104c446198c8f7fd98f35c179e19",
+  "pins" : [
+    {
+      "identity" : "cp3music",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/cornedriesprong/CP3Music",
+      "state" : {
+        "branch" : "main",
+        "revision" : "ea88388200f860e4a85715f3988b7e2b8eda5b18"
+      }
+    }
+  ],
+  "version" : 3
+}

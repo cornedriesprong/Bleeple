@@ -6,16 +6,14 @@
 //
 
 import SwiftUI
+import CP3Music
 
 struct ColorTheme: EnvironmentKey {
     static let defaultValue: Color = .red
 }
 
-extension EnvironmentValues {
-    var color: Color {
-        get { self[ColorTheme.self] }
-        set { self[ColorTheme.self] = newValue }
-    }
+struct Scale: EnvironmentKey {
+    static let defaultValue = CP3Music.Scale(CP3Music.Key(.c), .major)
 }
 
 struct ShiftPressed: EnvironmentKey {
@@ -23,6 +21,16 @@ struct ShiftPressed: EnvironmentKey {
 }
 
 extension EnvironmentValues {
+    var color: Color {
+        get { self[ColorTheme.self] }
+        set { self[ColorTheme.self] = newValue }
+    }
+    
+    var scale: CP3Music.Scale {
+        get { self[Scale.self] }
+        set { self[Scale.self] = newValue }
+    }
+    
     var isShiftPressed: Bool {
         get { self[ShiftPressed.self] }
         set { self[ShiftPressed.self] = newValue }

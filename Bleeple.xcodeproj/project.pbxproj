@@ -17,8 +17,9 @@
 		97AA01E32C712BD400AD80B0 /* MainViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97AA01E22C712BD400AD80B0 /* MainViewModelTests.swift */; };
 		97C1F6D72C6E7F62007A2687 /* XYPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C1F6D62C6E7F62007A2687 /* XYPad.swift */; };
 		97C2BD312C73204500EE05C8 /* TapGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C2BD302C73204500EE05C8 /* TapGrid.swift */; };
+		97C2BD372C738A7500EE05C8 /* CP3Music in Frameworks */ = {isa = PBXBuildFile; productRef = 97C2BD362C738A7500EE05C8 /* CP3Music */; };
 		97CA19FE2C648A9C006BD4E8 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CA19FD2C648A9C006BD4E8 /* ViewModel.swift */; };
-		97CA1A002C648C9B006BD4E8 /* ColorTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CA19FF2C648C9B006BD4E8 /* ColorTheme.swift */; };
+		97CA1A002C648C9B006BD4E8 /* EnvironmentValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CA19FF2C648C9B006BD4E8 /* EnvironmentValues.swift */; };
 		97CA1A022C648CB6006BD4E8 /* TopButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CA1A012C648CB6006BD4E8 /* TopButton.swift */; };
 		97CA1A042C648CCE006BD4E8 /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CA1A032C648CCE006BD4E8 /* CellView.swift */; };
 		97CA1A062C648EBB006BD4E8 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CA1A052C648EBB006BD4E8 /* Event.swift */; };
@@ -52,7 +53,7 @@
 		97C1F6D62C6E7F62007A2687 /* XYPad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XYPad.swift; sourceTree = "<group>"; };
 		97C2BD302C73204500EE05C8 /* TapGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapGrid.swift; sourceTree = "<group>"; };
 		97CA19FD2C648A9C006BD4E8 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
-		97CA19FF2C648C9B006BD4E8 /* ColorTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTheme.swift; sourceTree = "<group>"; };
+		97CA19FF2C648C9B006BD4E8 /* EnvironmentValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentValues.swift; sourceTree = "<group>"; };
 		97CA1A012C648CB6006BD4E8 /* TopButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopButton.swift; sourceTree = "<group>"; };
 		97CA1A032C648CCE006BD4E8 /* CellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellView.swift; sourceTree = "<group>"; };
 		97CA1A052C648EBB006BD4E8 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
@@ -65,6 +66,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				973E7E8B2C6C90DF0004ECCB /* libcp3_dsp.a in Frameworks */,
+				97C2BD372C738A7500EE05C8 /* CP3Music in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -110,7 +112,7 @@
 				97CA1A032C648CCE006BD4E8 /* CellView.swift */,
 				97CA19FD2C648A9C006BD4E8 /* ViewModel.swift */,
 				971102A62C5170C300A649F3 /* AudioEngine.swift */,
-				97CA19FF2C648C9B006BD4E8 /* ColorTheme.swift */,
+				97CA19FF2C648C9B006BD4E8 /* EnvironmentValues.swift */,
 				97CA1A052C648EBB006BD4E8 /* Event.swift */,
 				973E7E892C6C90630004ECCB /* cp3_dsp.h */,
 				971102772C516E0400A649F3 /* Assets.xcassets */,
@@ -162,6 +164,9 @@
 			dependencies = (
 			);
 			name = Bleeple;
+			packageProductDependencies = (
+				97C2BD362C738A7500EE05C8 /* CP3Music */,
+			);
 			productName = Bleeple;
 			productReference = 971102702C516E0300A649F3 /* Bleeple.app */;
 			productType = "com.apple.product-type.application";
@@ -213,6 +218,9 @@
 				Base,
 			);
 			mainGroup = 971102672C516E0300A649F3;
+			packageReferences = (
+				97C2BD352C738A7500EE05C8 /* XCRemoteSwiftPackageReference "CP3Music" */,
+			);
 			productRefGroup = 971102712C516E0300A649F3 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -271,7 +279,7 @@
 				97CA1A062C648EBB006BD4E8 /* Event.swift in Sources */,
 				9796B3CA2C72012300E17C6A /* Constants.swift in Sources */,
 				971102A72C5170C300A649F3 /* AudioEngine.swift in Sources */,
-				97CA1A002C648C9B006BD4E8 /* ColorTheme.swift in Sources */,
+				97CA1A002C648C9B006BD4E8 /* EnvironmentValues.swift in Sources */,
 				971102762C516E0300A649F3 /* MainView.swift in Sources */,
 				971102742C516E0300A649F3 /* BleepleApp.swift in Sources */,
 				97CA19FE2C648A9C006BD4E8 /* ViewModel.swift in Sources */,
@@ -589,6 +597,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		97C2BD352C738A7500EE05C8 /* XCRemoteSwiftPackageReference "CP3Music" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/cornedriesprong/CP3Music";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		97C2BD362C738A7500EE05C8 /* CP3Music */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 97C2BD352C738A7500EE05C8 /* XCRemoteSwiftPackageReference "CP3Music" */;
+			productName = CP3Music;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 971102682C516E0300A649F3 /* Project object */;
 }

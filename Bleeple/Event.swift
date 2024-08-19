@@ -13,18 +13,20 @@ struct Event: Identifiable {
     var velocity: Int
     var start: Double
     var duration: Double
-    var isSelected: Bool
     var cutoff: Double
     var q: Double
+    var isSelected: Bool
+    var isPlaying: Bool
 
     init(pitch: Int, velocity: Int = 100, start: Double, length: Double = 1.0) {
         self.pitch = pitch
         self.velocity = velocity
         self.start = start
         self.duration = length
-        self.isSelected = false
-        self.cutoff = 0.5
+        self.cutoff = 0.2
         self.q = 0.5
+        self.isSelected = false
+        self.isPlaying = false
     }
 }
 

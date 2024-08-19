@@ -17,7 +17,7 @@ struct MainView: View {
     // MARK: - Properties
     
     @Environment(\.color) private var color
-    @State private var viewModel = ViewModel()
+    @State private var viewModel = ViewModel.shared
     @State private var isPlaying = false
     @State private var mode: Mode = .grid
     @State private var isShiftPressed = false
@@ -97,7 +97,7 @@ struct MainView: View {
     }
     
     var grid: some View {
-        TapGrid()
+        TapGrid(viewModel: $viewModel)
     }
 
     var roll: some View {
@@ -134,7 +134,7 @@ struct MainView: View {
                 .pickerStyle(.segmented)
                 .labelsHidden()
                 .padding()
-
+                
                 switch mode {
                 case .grid:
                     grid
@@ -145,8 +145,7 @@ struct MainView: View {
                 }
             }
         }
-        .focusable()
-        .focusEffectDisabled()
+#if canImport(AppKit)
         .onAppear {
             addKeyboardListeners()
         }
@@ -154,8 +153,10 @@ struct MainView: View {
             removeKeyboardListeners()
         }
         .environment(\.isShiftPressed, isShiftPressed)
+#endif
     }
     
+#if canImport(AppKit)
     private func addKeyboardListeners() {
         NSEvent.addLocalMonitorForEvents(matching: [.flagsChanged]) { event in
             isShiftPressed = event.modifierFlags.contains(.shift)
@@ -166,6 +167,7 @@ struct MainView: View {
     private func removeKeyboardListeners() {
         NSEvent.removeMonitor(self)
     }
+#endif
 }
 
 #Preview {

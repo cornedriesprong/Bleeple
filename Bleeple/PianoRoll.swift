@@ -58,7 +58,8 @@ struct EventView: View {
    @GestureState var startEvent: Event?
    @GestureState var lengthOffset = 0.0
    @Binding var event: Event
-   @State var hovering = false
+   @State var isHovering = false
+   @State var isPlaying = false
    var length: Int
    var pitchCount: Int
    var gridSize: CGSize
@@ -112,21 +113,23 @@ struct EventView: View {
       ZStack(alignment: .trailing) {
          ZStack(alignment: .leading) {
             Rectangle()
-               .foregroundColor(color.opacity((hovering || offset != .zero || lengthOffset != 0) ? 1.0 : 0.8))
+               .foregroundColor(event.isPlaying ? .primary : color.opacity((isHovering || offset != .zero || lengthOffset != 0) ? 1.0 : 0.8))
          }
+
          Rectangle()
             .foregroundColor(.black)
             .padding(4)
             .frame(width: 10)
       }
-      .onHover { over in hovering = over }
+      .onHover { over in isHovering = over }
       .border(event.isSelected ? Color.primary : Color.clear)
       .padding(1) // so we can see consecutive notes
       .frame(width: max(gridSize.width, gridSize.width * event.duration + lengthOffset),
              height: gridSize.height)
       .offset(eventOffset(event: startEvent ?? event, dragOffset: offset))
       .gesture(dragGesture)
-      .animation(.easeInOut(duration: 0.2), value: hovering)
+      .animation(.easeInOut(duration: 0.2), value: isHovering)
+      .animation(.easeOut(duration: 0.2), value: event.isPlaying)
       .animation(.easeOut(duration: 0.2), value: startEvent)
 //        .preference(key: NoteOffsetsKey.self,
 //                    value: [NoteOffsetInfo(offset: noteOffset(note: startNote ?? note, dragOffset: offset),
@@ -197,14 +200,18 @@ struct PianoRoll: View {
             viewModel.addEvent(event)
          }
 
-         PianoRollGrid(gridSize: gridSize, width: length, height: pitchCount)
-            .stroke(lineWidth: 0.5)
-            .foregroundColor(color.opacity(0.3))
-            .contentShape(Rectangle())
-            .gesture(TapGesture(count: 2).sequenced(before: dragGesture))
-            .onTapGesture {
-               viewModel.deselectAll()
-            }
+         PianoRollGrid(
+            gridSize: gridSize,
+            width: length,
+            height: pitchCount
+         )
+         .stroke(lineWidth: 0.5)
+         .foregroundColor(color.opacity(0.3))
+         .contentShape(Rectangle())
+         .gesture(TapGesture(count: 2).sequenced(before: dragGesture))
+         .onTapGesture {
+            viewModel.deselectAll()
+         }
 
          ForEach($viewModel.events) { $event in
             EventView(
@@ -226,6 +233,36 @@ struct PianoRoll: View {
                   }
             )
          }
+
+         TimelineView(.animation) { _ in
+            Canvas { context, size in
+               var path = Path()
+               let anchor = CGFloat(viewModel.playbackPosition) * gridSize.width * 4
+               path.move(to: CGPoint(x: anchor, y: 0))
+               path.addLine(to: CGPoint(x: anchor, y: size.height))
+               context.stroke(path, with: .color(.primary), lineWidth: 1)
+
+               // Update the playing state of events
+               let newPlayingIndices = viewModel.events.indices.filter { index in
+                  let event = viewModel.events[index]
+                  let eventStart = CGFloat(event.start) * gridSize.width
+                  let eventEnd = CGFloat(event.start + event.duration) * gridSize.width
+                  return anchor >= eventStart && anchor <= eventEnd
+               }
+
+               // Only update if there are changes
+               if newPlayingIndices != viewModel.playingIndices {
+                  viewModel.playingIndices.forEach {
+                     viewModel.events[$0].isPlaying = false
+                  }
+                  newPlayingIndices.forEach {
+                     viewModel.events[$0].isPlaying = true
+                  }
+                  viewModel.playingIndices = newPlayingIndices
+               }
+            }
+         }
+         .allowsHitTesting(false)
       }
       .frame(width: width, height: height)
    }

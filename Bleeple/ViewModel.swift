@@ -11,6 +11,8 @@ extension MainView {
     @Observable final class ViewModel {
         // MARK: - Types
         
+        static let shared = ViewModel()
+        
         enum Parameter: Int {
             case cutoff
             case q
@@ -34,10 +36,26 @@ extension MainView {
         var tone: Double = 0.5
         var delay: Double = 0.5
         var reverb: Double = 0.5
-        
+        var playbackPosition: Double = 0.0
+        @ObservationIgnored var playingIndices: [Int] = []
+
         private let engine = AudioEngine()
         private var history = [Command]()
         private var position = -1
+        
+        // MARK: - Initialization
+           
+        private init() {
+            setupCallback()
+        }
+        
+        // MARK: - Public methods
+        
+        func play(_ pitch: Int) {
+            let quantized = ceil(playbackPosition * 4)
+            let event = Event(pitch: pitch, start: quantized)
+            push(.insert(event: event))
+        }
 
         func addEvent(_ event: Event) {
             push(.insert(event: event))
@@ -139,6 +157,14 @@ extension MainView {
                     cutoff: Float(event.cutoff),
                     q: Float(event.q)
                 )
+            }
+        }
+        
+        private func setupCallback() {
+            set_playback_progress_callback { progress in
+                DispatchQueue.main.async {
+                    ViewModel.shared.playbackPosition = Double(progress)
+                }
             }
         }
     }
