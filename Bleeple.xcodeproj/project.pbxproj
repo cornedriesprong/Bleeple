@@ -21,7 +21,6 @@
 		97CA19FE2C648A9C006BD4E8 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CA19FD2C648A9C006BD4E8 /* ViewModel.swift */; };
 		97CA1A002C648C9B006BD4E8 /* EnvironmentValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CA19FF2C648C9B006BD4E8 /* EnvironmentValues.swift */; };
 		97CA1A022C648CB6006BD4E8 /* TopButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CA1A012C648CB6006BD4E8 /* TopButton.swift */; };
-		97CA1A042C648CCE006BD4E8 /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CA1A032C648CCE006BD4E8 /* CellView.swift */; };
 		97CA1A062C648EBB006BD4E8 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CA1A052C648EBB006BD4E8 /* Event.swift */; };
 		97CA1A082C649423006BD4E8 /* PianoRoll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CA1A072C649423006BD4E8 /* PianoRoll.swift */; };
 /* End PBXBuildFile section */
@@ -55,7 +54,6 @@
 		97CA19FD2C648A9C006BD4E8 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		97CA19FF2C648C9B006BD4E8 /* EnvironmentValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentValues.swift; sourceTree = "<group>"; };
 		97CA1A012C648CB6006BD4E8 /* TopButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopButton.swift; sourceTree = "<group>"; };
-		97CA1A032C648CCE006BD4E8 /* CellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellView.swift; sourceTree = "<group>"; };
 		97CA1A052C648EBB006BD4E8 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		97CA1A072C649423006BD4E8 /* PianoRoll.swift */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.swift; path = PianoRoll.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -102,18 +100,12 @@
 		971102722C516E0300A649F3 /* Bleeple */ = {
 			isa = PBXGroup;
 			children = (
+				97C2BD3A2C73906700EE05C8 /* Models */,
+				97C2BD382C738FD000EE05C8 /* Main */,
 				971102732C516E0300A649F3 /* BleepleApp.swift */,
-				971102752C516E0300A649F3 /* MainView.swift */,
-				97C2BD302C73204500EE05C8 /* TapGrid.swift */,
-				97C1F6D62C6E7F62007A2687 /* XYPad.swift */,
-				97CA1A072C649423006BD4E8 /* PianoRoll.swift */,
 				9796B3C92C72012300E17C6A /* Constants.swift */,
-				97CA1A012C648CB6006BD4E8 /* TopButton.swift */,
-				97CA1A032C648CCE006BD4E8 /* CellView.swift */,
-				97CA19FD2C648A9C006BD4E8 /* ViewModel.swift */,
 				971102A62C5170C300A649F3 /* AudioEngine.swift */,
 				97CA19FF2C648C9B006BD4E8 /* EnvironmentValues.swift */,
-				97CA1A052C648EBB006BD4E8 /* Event.swift */,
 				973E7E892C6C90630004ECCB /* cp3_dsp.h */,
 				971102772C516E0400A649F3 /* Assets.xcassets */,
 				971102792C516E0400A649F3 /* Bleeple.entitlements */,
@@ -145,6 +137,35 @@
 				973E7E8A2C6C90DF0004ECCB /* libcp3_dsp.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		97C2BD382C738FD000EE05C8 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				97C2BD392C73905300EE05C8 /* Subviews */,
+				97CA19FD2C648A9C006BD4E8 /* ViewModel.swift */,
+				971102752C516E0300A649F3 /* MainView.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		97C2BD392C73905300EE05C8 /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				97CA1A012C648CB6006BD4E8 /* TopButton.swift */,
+				97CA1A072C649423006BD4E8 /* PianoRoll.swift */,
+				97C2BD302C73204500EE05C8 /* TapGrid.swift */,
+				97C1F6D62C6E7F62007A2687 /* XYPad.swift */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
+		97C2BD3A2C73906700EE05C8 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				97CA1A052C648EBB006BD4E8 /* Event.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -287,7 +308,6 @@
 				97C1F6D72C6E7F62007A2687 /* XYPad.swift in Sources */,
 				97CA1A022C648CB6006BD4E8 /* TopButton.swift in Sources */,
 				97CA1A082C649423006BD4E8 /* PianoRoll.swift in Sources */,
-				97CA1A042C648CCE006BD4E8 /* CellView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
