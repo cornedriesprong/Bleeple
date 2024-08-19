@@ -74,6 +74,9 @@ extension MainView {
             let eventsToDelete = selectedEvents.isEmpty ? events : selectedEvents
             let commands: [Command] = eventsToDelete.map { .delete(event: $0) }
             push(.transaction(commands: commands))
+           
+            // clear engine here for now
+            engine.clearEvents()
         }
 
         func setParameter(_ parameter: Parameter, value: Double) {

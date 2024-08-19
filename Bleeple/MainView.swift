@@ -29,7 +29,6 @@ struct MainView: View {
             TopButton(imageName: "clear") {
                 viewModel.clear()
             }
-            .keyboardShortcut("c", modifiers: [.command])
             
             TopButton(imageName: "dice") {
                 print("randomize")
