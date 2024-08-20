@@ -8,5 +8,5 @@
 import Foundation
 
 enum Constants {
-    static let pitchCount = 127
+    static let pitchCount = Int8.max
 }

@@ -9,7 +9,7 @@ import Foundation
 
 struct Event: Identifiable {
     var id = UUID().uuidString
-    var pitch: Int
+    var pitch: Int8
     var velocity: Int
     var start: Double
     var duration: Double
@@ -18,11 +18,11 @@ struct Event: Identifiable {
     var isSelected: Bool
     var isPlaying: Bool
 
-    init(pitch: Int, velocity: Int = 100, start: Double, length: Double = 1.0) {
+    init(pitch: Int8, velocity: Int = 100, start: Double, duration: Double = 1.0) {
         self.pitch = pitch
         self.velocity = velocity
         self.start = start
-        self.duration = length
+        self.duration = duration
         self.cutoff = 0.2
         self.q = 0.5
         self.isSelected = false

@@ -30,7 +30,7 @@ struct PianoRollGrid: Shape {
       var path = Path()
 
       func drawHorizontal(count: Int, width: Double) {
-         for column in 0 ... count {
+         for column in 0...count {
             let anchor = Double(column) * width
             path.move(to: CGPoint(x: anchor, y: 0))
             path.addLine(to: CGPoint(x: anchor, y: size.height))
@@ -38,7 +38,7 @@ struct PianoRollGrid: Shape {
       }
 
       func drawVertical(count: Int, height: Double) {
-         for row in 0 ... count {
+         for row in 0...count {
             let anchor = Double(row) * height
             path.move(to: CGPoint(x: 0, y: anchor))
             path.addLine(to: CGPoint(x: size.width, y: anchor))
@@ -61,7 +61,7 @@ struct EventView: View {
    @State var isHovering = false
    @State var isPlaying = false
    var length: Int
-   var pitchCount: Int
+   var pitchCount: Int8
    var gridSize: CGSize
 
    var body: some View {
@@ -69,8 +69,10 @@ struct EventView: View {
       if offset != CGSize.zero {
          Rectangle()
             .foregroundColor(color.opacity(0.2))
-            .frame(width: gridSize.width * event.duration,
-                   height: gridSize.height)
+            .frame(
+               width: gridSize.width * event.duration,
+               height: gridSize.height
+            )
             .offset(eventOffset(event: event))
             .blendMode(.luminosity)
             .zIndex(-1)
@@ -113,7 +115,10 @@ struct EventView: View {
       ZStack(alignment: .trailing) {
          ZStack(alignment: .leading) {
             Rectangle()
-               .foregroundColor(event.isPlaying ? .primary : color.opacity((isHovering || offset != .zero || lengthOffset != 0) ? 1.0 : 0.8))
+               .foregroundColor(
+                  event.isPlaying
+                     ? .primary
+                     : color.opacity((isHovering || offset != .zero || lengthOffset != 0) ? 1.0 : 0.8))
          }
 
          Rectangle()
@@ -124,16 +129,18 @@ struct EventView: View {
       .onHover { over in isHovering = over }
       .border(event.isSelected ? Color.primary : Color.clear)
       .padding(1) // so we can see consecutive notes
-      .frame(width: max(gridSize.width, gridSize.width * event.duration + lengthOffset),
-             height: gridSize.height)
+      .frame(
+         width: max(gridSize.width, gridSize.width * event.duration + lengthOffset),
+         height: gridSize.height
+      )
       .offset(eventOffset(event: startEvent ?? event, dragOffset: offset))
       .gesture(dragGesture)
       .animation(.easeInOut(duration: 0.2), value: isHovering)
       .animation(.easeOut(duration: 0.2), value: event.isPlaying)
       .animation(.easeOut(duration: 0.2), value: startEvent)
-//        .preference(key: NoteOffsetsKey.self,
-//                    value: [NoteOffsetInfo(offset: noteOffset(note: startNote ?? note, dragOffset: offset),
-//                                           noteId: note.id)])
+      //        .preference(key: NoteOffsetsKey.self,
+      //                    value: [NoteOffsetInfo(offset: noteOffset(note: startNote ?? note, dragOffset: offset),
+      //                                           noteId: note.id)])
 
       // Length tab at the end of the note.
       HStack {
@@ -143,8 +150,10 @@ struct EventView: View {
             .frame(width: gridSize.width * 0.5, height: gridSize.height)
             .gesture(lengthDragGesture)
       }
-      .frame(width: gridSize.width * event.duration,
-             height: gridSize.height)
+      .frame(
+         width: gridSize.width * event.duration,
+         height: gridSize.height
+      )
       .offset(eventOffset(event: event, dragOffset: offset))
    }
 
@@ -154,7 +163,7 @@ struct EventView: View {
       e.start += round(offset.width / gridSize.width)
       e.start = max(0, e.start)
       e.start = min(Double(length - 1), e.start)
-      e.pitch -= Int(round(offset.height / gridSize.height))
+      e.pitch -= Int8(round(offset.height / gridSize.height))
       e.pitch = max(1, e.pitch)
       e.pitch = min(pitchCount, e.pitch)
       e.duration += lengthOffset / gridSize.width
@@ -177,6 +186,10 @@ struct PianoRoll: View {
    @Environment(\.color) private var color
    @Environment(\.isShiftPressed) private var isShiftPressed
    @Binding var viewModel: MainView.ViewModel
+   
+   @State private var dragStartPoint: CGPoint = .zero
+   @State private var dragCurrentPoint: CGPoint = .zero
+   @State private var isDragging: Bool = false
 
    let gridSize = CGSize(width: 33, height: 33)
    let length = 32
@@ -192,26 +205,69 @@ struct PianoRoll: View {
 
    var body: some View {
       ZStack(alignment: Alignment(horizontal: .leading, vertical: .top)) {
-         let dragGesture = DragGesture(minimumDistance: 0).onEnded { value in
-            let location = value.location
-            let step = Double(Int(location.x / gridSize.width))
-            let pitch = pitchCount - Int(location.y / gridSize.height)
-            let event = Event(pitch: pitch, start: step)
-            viewModel.addEvent(event)
-         }
+         let dragGesture = DragGesture(minimumDistance: 0)
+            .onChanged { value in
+               if !isDragging {
+                  dragStartPoint = value.startLocation
+                  isDragging = true
+               }
+               dragCurrentPoint = value.location
+
+               // check if notes are selected
+               let selectionRect = CGRect(
+                  x: min(dragStartPoint.x, dragCurrentPoint.x),
+                  y: min(dragStartPoint.y, dragCurrentPoint.y),
+                  width: abs(dragCurrentPoint.x - dragStartPoint.x),
+                  height: abs(dragCurrentPoint.y - dragStartPoint.y)
+               )
+
+               for (index, event) in viewModel.events.enumerated() {
+                  let eventRect = CGRect(
+                     x: CGFloat(event.start) * gridSize.width,
+                     y: CGFloat(pitchCount - event.pitch) * gridSize.height,
+                     width: gridSize.width * event.duration,
+                     height: gridSize.height
+                  )
+
+                  if selectionRect.intersects(eventRect) {
+                     viewModel.events[index].isSelected = true
+                  } else {
+                     viewModel.events[index].isSelected = false
+                  }
+               }
+            }
+            .onEnded { value in
+               isDragging = false
+               let dragDistance = CGPoint(
+                  x: dragCurrentPoint.x - dragStartPoint.x,
+                  y: dragCurrentPoint.y - dragStartPoint.y
+               )
+               let distance = sqrt(dragDistance.x * dragDistance.x + dragDistance.y * dragDistance.y)
+
+               if distance < 10 {
+                  let location = value.location
+                  let step = Double(Int(location.x / gridSize.width))
+                  let pitch = pitchCount - Int8(location.y / gridSize.height)
+                  let event = Event(pitch: Int8(pitch), start: step)
+                  viewModel.addEvent(event)
+               }
+            }
+
+         let tapGesture = TapGesture()
+            .onEnded {
+               viewModel.deselectAll()
+            }
 
          PianoRollGrid(
             gridSize: gridSize,
             width: length,
-            height: pitchCount
+            height: Int(pitchCount)
          )
          .stroke(lineWidth: 0.5)
-         .foregroundColor(color.opacity(0.3))
+         .foregroundColor(Color.gray.opacity(0.3))
          .contentShape(Rectangle())
-         .gesture(TapGesture(count: 2).sequenced(before: dragGesture))
-         .onTapGesture {
-            viewModel.deselectAll()
-         }
+         .gesture(dragGesture)
+         .simultaneousGesture(tapGesture)
 
          ForEach($viewModel.events) { $event in
             EventView(
@@ -234,6 +290,21 @@ struct PianoRoll: View {
             )
          }
 
+         // selection rectangle
+         if isDragging {
+            Rectangle()
+               .fill(color.opacity(0.1))
+               .stroke(color, lineWidth: 0.5)
+               .frame(
+                  width: abs(dragCurrentPoint.x - dragStartPoint.x),
+                  height: abs(dragCurrentPoint.y - dragStartPoint.y)
+               )
+               .position(
+                  x: min(dragStartPoint.x, dragCurrentPoint.x) + abs(dragCurrentPoint.x - dragStartPoint.x) / 2,
+                  y: min(dragStartPoint.y, dragCurrentPoint.y) + abs(dragCurrentPoint.y - dragStartPoint.y) / 2
+               )
+         }
+
          TimelineView(.animation) { _ in
             Canvas { context, size in
                var path = Path()
@@ -251,12 +322,13 @@ struct PianoRoll: View {
                }
 
                // Only update if there are changes
+               // TODO: this seems to crash when removing an event mid-playback
                if newPlayingIndices != viewModel.playingIndices {
-                  viewModel.playingIndices.forEach {
-                     viewModel.events[$0].isPlaying = false
+                  for playingIndex in viewModel.playingIndices {
+                     viewModel.events[playingIndex].isPlaying = false
                   }
-                  newPlayingIndices.forEach {
-                     viewModel.events[$0].isPlaying = true
+                  for newPlayingIndex in newPlayingIndices {
+                     viewModel.events[newPlayingIndex].isPlaying = true
                   }
                   viewModel.playingIndices = newPlayingIndices
                }

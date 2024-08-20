@@ -33,7 +33,7 @@ final class AudioEngine {
     
     // MARK: - Public methods
     
-    func addEvent(step: Int, pitch: Int, duration: Float, cutoff: Float, q: Float) {
+    func addEvent(step: Int, pitch: Int8, duration: Float, cutoff: Float, q: Float) {
         let beatTime: Float = Float(step) / 4.0
         let pitch: Int8 = Int8(pitch)
         let velocity: Int8 = 100
