@@ -10,7 +10,7 @@ import XCTest
 
 final class MainViewModelTests: XCTestCase {
     func testUndoRedo() throws {
-        let viewModel = MainView.ViewModel()
+        let viewModel = MainView.ViewModel.shared
             
         // Check initial state
         XCTAssert(viewModel.events.isEmpty, "Initial events should be empty")
