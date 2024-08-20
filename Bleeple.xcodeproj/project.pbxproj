@@ -141,26 +141,42 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		97C2BD382C738FD000EE05C8 /* Main */ = {
+		9751F1E02C74FD54000A20A4 /* PianoRoll */ = {
 			isa = PBXGroup;
 			children = (
 				97CA1A072C649423006BD4E8 /* PianoRoll.swift */,
 				97C2BD3B2C748C8800EE05C8 /* EventView.swift */,
-				97C2BD392C73905300EE05C8 /* Subviews */,
+			);
+			path = PianoRoll;
+			sourceTree = "<group>";
+		};
+		9751F1E22C74FD7C000A20A4 /* Grid */ = {
+			isa = PBXGroup;
+			children = (
+				97C2BD302C73204500EE05C8 /* TapGrid.swift */,
+			);
+			path = Grid;
+			sourceTree = "<group>";
+		};
+		97C2BD382C738FD000EE05C8 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				9751F1E02C74FD54000A20A4 /* PianoRoll */,
+				9751F1E22C74FD7C000A20A4 /* Grid */,
+				97C2BD392C73905300EE05C8 /* XY */,
 				97CA19FD2C648A9C006BD4E8 /* ViewModel.swift */,
 				971102752C516E0300A649F3 /* MainView.swift */,
+				97CA1A012C648CB6006BD4E8 /* TopButton.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
 		};
-		97C2BD392C73905300EE05C8 /* Subviews */ = {
+		97C2BD392C73905300EE05C8 /* XY */ = {
 			isa = PBXGroup;
 			children = (
-				97CA1A012C648CB6006BD4E8 /* TopButton.swift */,
-				97C2BD302C73204500EE05C8 /* TapGrid.swift */,
 				97C1F6D62C6E7F62007A2687 /* XYPad.swift */,
 			);
-			path = Subviews;
+			path = XY;
 			sourceTree = "<group>";
 		};
 		97C2BD3A2C73906700EE05C8 /* Models */ = {
