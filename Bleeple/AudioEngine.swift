@@ -33,6 +33,14 @@ final class AudioEngine {
     
     // MARK: - Public methods
     
+    func noteOn(pitch: Int8, velocity: Int8, param1: Float, param2: Float) {
+        note_on(engine, pitch, velocity, param1, param2)
+    }
+    
+    func noteOff(pitch: Int8) {
+        note_off(engine, pitch)
+    }
+
     func addEvent(step: Int, pitch: Int8, duration: Float, cutoff: Float, q: Float) {
         let beatTime: Float = Float(step) / 4.0
         let pitch: Int8 = Int8(pitch)

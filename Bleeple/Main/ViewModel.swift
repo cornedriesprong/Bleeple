@@ -1,4 +1,3 @@
-//
 //  ViewModel.swift
 //  Bleeple
 //
@@ -37,12 +36,14 @@ extension MainView {
         var delay: Double = 0.5
         var reverb: Double = 0.5
         var playbackPosition: Double = 0.0
+        
         @ObservationIgnored var playingIndices: [Int] = []
+        @ObservationIgnored private var heldEvents = Set<Event>()
 
         private let engine = AudioEngine()
         private var history = [Command]()
         private var position = -1
-        
+
         // MARK: - Initialization
            
         private init() {
@@ -51,10 +52,25 @@ extension MainView {
         
         // MARK: - Public methods
         
-        func play(_ pitch: Int) {
+        func noteOn(_ pitch: Int) {
+            let pitch = Int8(pitch)
             let quantized = ceil(playbackPosition * 4)
-            let event = Event(pitch: pitch, start: quantized)
-            push(.insert(event: event))
+            let event = Event(pitch: pitch, start: quantized, duration: .infinity)
+            heldEvents.insert(event)
+        
+            engine.noteOn(pitch: pitch, velocity: 100, param1: 0.2, param2: 0.5)
+        }
+        
+        func noteOff(_ pitch: Int) {
+            let quantized = ceil(playbackPosition * 4)
+            for var event in heldEvents where event.pitch == pitch {
+                // set actual event duration, now that we have the note off
+                event.duration = max(1, quantized - event.start)
+                push(.insert(event: event))
+                heldEvents.remove(event)
+            }
+            
+            engine.noteOff(pitch: Int8(pitch))
         }
 
         func addEvent(_ event: Event) {
