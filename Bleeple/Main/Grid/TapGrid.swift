@@ -10,6 +10,7 @@ import SwiftUI
 
 struct TapGrid: View {
     private static let gridLength = 8
+    private static let spacing = 0.5
 
     @Environment(\.color) private var color
     @Environment(\.scale) private var scale
@@ -23,18 +24,22 @@ struct TapGrid: View {
     private let rows = Array(repeating: GridItem(.flexible(minimum: 44), spacing: 0.5), count: 4)
 
     var body: some View {
-        Grid(horizontalSpacing: 0.5, verticalSpacing: 0.5) {
+        Grid(horizontalSpacing: TapGrid.spacing, verticalSpacing: TapGrid.spacing) {
             ForEach(0 ..< TapGrid.gridLength) { row in
                 GridRow {
                     ForEach(0 ..< TapGrid.gridLength) { column in
                         let pitchCount = TapGrid.gridLength * TapGrid.gridLength
                         let pitch = pitchCount - ((row * TapGrid.gridLength) - column) + 20
                         let isInScale = scale.pitches.map { Int($0.rawValue) }.contains(pitch % 12)
+                        let isTapped = tapped[row][column]
+                        let isActive = viewModel.activePitches.contains(Int8(pitch))
+                        let opacity = getOpacity(isTapped: isTapped, isActive: isActive, isInScale: isInScale)
 
                         ZStack {
                             Rectangle()
-                                .fill(color.opacity(tapped[row][column] ? 1.0 : isInScale ? 0.2 : 0.1))
+                                .fill(color.opacity(opacity))
                                 .padding(0.5)
+                                .animation(.easeInOut, value: viewModel.activePitches)
                                 .overlay(alignment: .topLeading) {
                                     Text(Pitch(midiNoteNumber: Int8(pitch)).description)
                                         .font(.caption2)
@@ -65,5 +70,15 @@ struct TapGrid: View {
             }
         }
         .padding(0.5)
+    }
+
+    func getOpacity(isTapped: Bool, isActive: Bool, isInScale: Bool) -> Double {
+        if isTapped || isActive {
+            return 1.0
+        } else if isInScale {
+            return 0.2
+        } else {
+            return 0.1
+        }
     }
 }
