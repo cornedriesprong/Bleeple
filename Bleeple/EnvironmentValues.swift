@@ -21,6 +21,7 @@ struct ShiftPressed: EnvironmentKey {
 }
 
 extension EnvironmentValues {
+    // TODO: use @Entry macro
     var color: Color {
         get { self[ColorTheme.self] }
         set { self[ColorTheme.self] = newValue }
