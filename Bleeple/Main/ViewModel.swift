@@ -36,7 +36,8 @@ extension MainView {
         var delay: Double = 0.5
         var reverb: Double = 0.5
         var playbackPosition: Double = 0.0
-        
+        var activePitches = Set<Int8>()
+
         @ObservationIgnored var playingIndices: [Int] = []
         @ObservationIgnored private var heldEvents = Set<Event>()
 
@@ -180,6 +181,16 @@ extension MainView {
             set_playback_progress_callback { progress in
                 DispatchQueue.main.async {
                     ViewModel.shared.playbackPosition = Double(progress)
+                }
+            }
+            
+            set_note_played_callback { noteOn, pitch in
+                DispatchQueue.main.async {
+                    if noteOn {
+                        ViewModel.shared.activePitches.insert(pitch)
+                    } else {
+                        ViewModel.shared.activePitches.remove(pitch)
+                    }
                 }
             }
         }
