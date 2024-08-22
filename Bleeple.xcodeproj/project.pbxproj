@@ -24,6 +24,7 @@
 		97CA1A022C648CB6006BD4E8 /* TopButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CA1A012C648CB6006BD4E8 /* TopButton.swift */; };
 		97CA1A062C648EBB006BD4E8 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CA1A052C648EBB006BD4E8 /* Event.swift */; };
 		97CA1A082C649423006BD4E8 /* PianoRoll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CA1A072C649423006BD4E8 /* PianoRoll.swift */; };
+		97DC5F8D2C76CDFC0042A623 /* PlaitsEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DC5F8C2C76CDFC0042A623 /* PlaitsEngine.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 		97CA1A012C648CB6006BD4E8 /* TopButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopButton.swift; sourceTree = "<group>"; };
 		97CA1A052C648EBB006BD4E8 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		97CA1A072C649423006BD4E8 /* PianoRoll.swift */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.swift; path = PianoRoll.swift; sourceTree = "<group>"; };
+		97DC5F8C2C76CDFC0042A623 /* PlaitsEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaitsEngine.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,6 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				97CA1A052C648EBB006BD4E8 /* Event.swift */,
+				97DC5F8C2C76CDFC0042A623 /* PlaitsEngine.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -322,6 +325,7 @@
 				97C2BD3C2C748C8800EE05C8 /* EventView.swift in Sources */,
 				97CA1A002C648C9B006BD4E8 /* EnvironmentValues.swift in Sources */,
 				971102762C516E0300A649F3 /* MainView.swift in Sources */,
+				97DC5F8D2C76CDFC0042A623 /* PlaitsEngine.swift in Sources */,
 				971102742C516E0300A649F3 /* BleepleApp.swift in Sources */,
 				97CA19FE2C648A9C006BD4E8 /* ViewModel.swift in Sources */,
 				97C2BD312C73204500EE05C8 /* TapGrid.swift in Sources */,

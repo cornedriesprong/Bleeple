@@ -55,9 +55,9 @@ extension MainView {
             }
         }
 
-        var selectedSound: Int = 0 {
+        var selectedSound: PlaitsEngine = .virtualAnalog1 {
             didSet {
-                engine.setSound(Int8(selectedSound))
+                engine.setSound(Int8(selectedSound.rawValue))
             }
         }
 
@@ -81,7 +81,7 @@ extension MainView {
         
         func noteOn(_ pitch: Int) {
             let pitch = Int8(pitch)
-            let quantized = ceil(playbackPosition * 4)
+            let quantized = round(playbackPosition * 4)
             let event = Event(pitch: pitch, start: quantized, duration: .infinity)
             heldEvents.insert(event)
         
@@ -91,7 +91,7 @@ extension MainView {
         func noteOff(_ pitch: Int) {
             let quantized = ceil(playbackPosition * 4)
             for var event in heldEvents where event.pitch == pitch {
-                // set actual event duration, now that we have the note off
+                // set actual event duration, now that we have the note off time
                 event.duration = max(1, quantized - event.start)
                 push(.insert(event: event))
                 heldEvents.remove(event)

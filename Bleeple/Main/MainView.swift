@@ -27,8 +27,8 @@ struct MainView: View {
     var topBar: some View {
         HStack(spacing: 22) {
             Picker(selection: $viewModel.selectedSound) {
-                ForEach(0..<24) {
-                    Text("\($0)")
+                ForEach(PlaitsEngine.allCases.filter { $0.enabled }, id: \.self) {
+                    Text("\($0.description)")
                 }
             } label: {
                 Text("sound")
