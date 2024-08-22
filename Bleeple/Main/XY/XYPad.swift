@@ -42,8 +42,8 @@ struct XYPad: View {
                     // no animation on initial positioning
                     withAnimation(.linear(duration: 0)) {
                         position = CGPoint(
-                            x: geometry.size.width / 2,
-                            y: geometry.size.height / 2
+                            x: viewModel.damping * geometry.size.width,
+                            y: viewModel.tone * geometry.size.height
                         )
                     }
                 }
