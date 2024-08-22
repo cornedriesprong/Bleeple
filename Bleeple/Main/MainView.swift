@@ -116,7 +116,7 @@ struct MainView: View {
     }
     
     var xy: some View {
-        XYPad()
+        XYPad(viewModel: $viewModel)
     }
 
     var body: some View {
