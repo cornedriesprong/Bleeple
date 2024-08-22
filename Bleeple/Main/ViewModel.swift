@@ -31,10 +31,36 @@ extension MainView {
             }
         }
         
-        var damping: Double = 0.5
-        var tone: Double = 0.5
-        var delay: Double = 0.5
-        var reverb: Double = 0.5
+        var damping: Double = 0.5 {
+            didSet {
+                engine.setParameter(0, to: Float(damping))
+            }
+        }
+
+        var tone: Double = 0.5 {
+            didSet {
+                engine.setParameter(1, to: Float(tone))
+            }
+        }
+
+        var delay: Double = 0.5 {
+            didSet {
+                engine.setParameter(2, to: Float(delay))
+            }
+        }
+
+        var reverb: Double = 0.5 {
+            didSet {
+                engine.setParameter(3, to: Float(reverb))
+            }
+        }
+
+        var selectedSound: Int = 0 {
+            didSet {
+                engine.setSound(Int8(selectedSound))
+            }
+        }
+
         var playbackPosition: Double = 0.0
         var activePitches = Set<Int8>()
 

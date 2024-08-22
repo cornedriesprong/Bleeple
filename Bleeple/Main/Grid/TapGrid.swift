@@ -9,7 +9,7 @@ import CP3Music
 import SwiftUI
 
 struct TapGrid: View {
-    private static let gridLength = 8
+    private static let gridLength = 7
     private static let spacing = 0.5
 
     @Environment(\.color) private var color

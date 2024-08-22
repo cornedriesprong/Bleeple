@@ -26,6 +26,14 @@ struct MainView: View {
 
     var topBar: some View {
         HStack(spacing: 22) {
+            Picker(selection: $viewModel.selectedSound) {
+                ForEach(0..<24) {
+                    Text("\($0)")
+                }
+            } label: {
+                Text("sound")
+            }
+                         
             TopButton(imageName: "clear") {
                 viewModel.clear()
             }

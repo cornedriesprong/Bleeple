@@ -40,6 +40,14 @@ final class AudioEngine {
     func noteOff(pitch: Int8) {
         note_off(engine, pitch)
     }
+    
+    func setSound(_ sound: Int8) {
+        set_sound(engine, sound)
+    }
+    
+    func setParameter(_ parameter: Int8, to value: Float) {
+        set_parameter(engine, parameter, value)
+    }
 
     func addEvent(step: Int, pitch: Int8, duration: Float, cutoff: Float, q: Float) {
         let beatTime: Float = Float(step) / 4.0
