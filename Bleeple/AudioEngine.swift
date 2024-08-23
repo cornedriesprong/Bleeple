@@ -46,7 +46,7 @@ final class AudioEngine {
     }
     
     func setParameter(_ parameter: Int8, to value: Float) {
-        set_parameter(engine, parameter, value)
+        set_parameter(parameter, value)
     }
 
     func addEvent(step: Int, pitch: Int8, duration: Float, cutoff: Float, q: Float) {

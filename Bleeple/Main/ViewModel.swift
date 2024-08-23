@@ -4,6 +4,7 @@
 //  Created by Corné on 8/8/24.
 //
 
+import Combine
 import SwiftUI
 
 extension MainView {
@@ -33,27 +34,31 @@ extension MainView {
         
         var damping: Double = 0.5 {
             didSet {
-                engine.setParameter(0, to: Float(damping))
+                dampingSubject.send(Float(damping))
             }
         }
+        private let dampingSubject = PassthroughSubject<Float, Never>()
 
         var tone: Double = 0.5 {
             didSet {
-                engine.setParameter(1, to: Float(tone))
+                toneSubject.send(Float(tone))
             }
         }
+        private let toneSubject = PassthroughSubject<Float, Never>()
 
         var delay: Double = 0.5 {
             didSet {
-                engine.setParameter(2, to: Float(delay))
+                delaySubject.send(Float(delay))
             }
         }
+        private let delaySubject = PassthroughSubject<Float, Never>()
 
         var reverb: Double = 0.5 {
             didSet {
-                engine.setParameter(3, to: Float(reverb))
+                reverbSubject.send(Float(reverb))
             }
         }
+        private let reverbSubject = PassthroughSubject<Float, Never>()
 
         var selectedSound: PlaitsEngine = .virtualAnalog1 {
             didSet {
@@ -70,11 +75,13 @@ extension MainView {
         private let engine = AudioEngine()
         private var history = [Command]()
         private var position = -1
+        private var cancellables = Set<AnyCancellable>()
 
         // MARK: - Initialization
            
         private init() {
-            setupCallback()
+            setupParameterPublishers()
+            setupCallbacks()
         }
         
         // MARK: - Public methods
@@ -203,7 +210,37 @@ extension MainView {
             }
         }
         
-        private func setupCallback() {
+        private func setupParameterPublishers() {
+            dampingSubject
+                .throttle(for: .seconds(0.2), scheduler: DispatchQueue.main, latest: true)
+                .sink { [weak self] value in
+                    self?.engine.setParameter(0, to: Float(value))
+                }
+                .store(in: &cancellables)
+            
+            toneSubject
+                .throttle(for: .seconds(0.2), scheduler: DispatchQueue.main, latest: true)
+                .sink { [weak self] value in
+                    self?.engine.setParameter(1, to: Float(value))
+                }
+                .store(in: &cancellables)
+            
+            delaySubject
+                .throttle(for: .seconds(0.2), scheduler: DispatchQueue.main, latest: true)
+                .sink { [weak self] value in
+                    self?.engine.setParameter(2, to: Float(value))
+                }
+                .store(in: &cancellables)
+            
+            reverbSubject
+                .throttle(for: .seconds(0.2), scheduler: DispatchQueue.main, latest: true)
+                .sink { [weak self] value in
+                    self?.engine.setParameter(3, to: Float(value))
+                }
+                .store(in: &cancellables)
+        }
+        
+        private func setupCallbacks() {
             set_playback_progress_callback { progress in
                 DispatchQueue.main.async {
                     ViewModel.shared.playbackPosition = Double(progress)
