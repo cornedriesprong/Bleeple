@@ -9,8 +9,6 @@ import SwiftUI
 
 struct XYPad: View {
     @Environment(\.color) private var color
-    @State private var position: CGPoint = .zero
-    @State private var containerSize: CGSize = .zero
     @Binding var viewModel: MainView.ViewModel
 
     private let circleSize: CGFloat = 22
@@ -23,36 +21,36 @@ struct XYPad: View {
                         .foregroundColor(color.opacity(0.1))
                         .gesture(
                             DragGesture()
-                                .onChanged { value in
-                                    position = getPosition(for: value.location, in: geometry.size)
+                                .onChanged { drag in
+                                    let position = getPosition(for: drag.location, in: geometry.size)
+                                    viewModel.damping = position.x / geometry.size.width
+                                    viewModel.tone = position.y / geometry.size.height
                                 }
                         )
                         .contentShape(Rectangle())
                         .onTapGesture { location in
-                            position = getPosition(for: location, in: geometry.size)
+                            let position = getPosition(for: location, in: geometry.size)
+                            viewModel.damping = position.x / geometry.size.width
+                            viewModel.tone = position.y / geometry.size.height
                         }
 
                     Circle()
                         .foregroundColor(color)
                         .frame(width: circleSize, height: circleSize)
-                        .position(position)
-                        .animation(.bouncy(duration: 0.2), value: position)
-                }
-                .onAppear {
-                    // no animation on initial positioning
-                    withAnimation(.linear(duration: 0)) {
-                        position = CGPoint(
-                            x: viewModel.damping * geometry.size.width,
-                            y: viewModel.tone * geometry.size.height
-                        )
-                    }
-                }
-                .onChange(of: position) { _, newValue in
-                    viewModel.damping = newValue.x / geometry.size.width
-                    viewModel.tone = newValue.y / geometry.size.height
+                        .position(getPosition(in: geometry.size))
+                        // TODO: see if we can make this nicer
+                        .animation(.bouncy(duration: 0.5), value: viewModel.damping)
+                        .animation(.bouncy(duration: 0.5), value: viewModel.tone)
                 }
             }
         }
+    }
+    
+    private func getPosition(in size: CGSize) -> CGPoint {
+        CGPoint(
+            x: viewModel.damping * size.width,
+            y: viewModel.tone * size.height
+        )
     }
 
     private func getPosition(for location: CGPoint, in size: CGSize) -> CGPoint {
