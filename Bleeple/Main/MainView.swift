@@ -60,45 +60,14 @@ struct MainView: View {
     }
     
     var parameterSliders: some View {
-        VStack {
-            HStack(spacing: 66) {
-                Slider(value: $viewModel.damping) {
-                    Text("damping")
-                        .fontDesign(.monospaced)
-                        .frame(width: 66, alignment: .leading)
-                }
-                .onChange(of: viewModel.damping) { _, newValue in
-                    viewModel.setParameter(.cutoff, value: newValue)
-                }
-                .tint(color)
-                
-                Slider(value: $viewModel.delay) {
-                    Text("delay")
-                        .fontDesign(.monospaced)
-                        .frame(width: 66, alignment: .leading)
-                }
-                .tint(color)
-                .onChange(of: viewModel.delay) { _, _ in
-//                    viewModel.setParameter(.cutoff, value: newValue)
-                }
+        Grid {
+            GridRow {
+                Knob(text: "damping", value: $viewModel.damping)
+                Knob(text: "tone", value: $viewModel.tone)
             }
-            HStack(spacing: 66) {
-                Slider(value: $viewModel.tone) {
-                    Text("tone")
-                        .fontDesign(.monospaced)
-                        .frame(width: 66, alignment: .leading)
-                }
-                .onChange(of: viewModel.tone) { _, newValue in
-                    viewModel.setParameter(.q, value: newValue)
-                }
-                .tint(color)
-                
-                Slider(value: $viewModel.reverb) {
-                    Text("reverb")
-                        .fontDesign(.monospaced)
-                        .frame(width: 66, alignment: .leading)
-                }
-                .tint(color)
+            GridRow {
+                Knob(text: "delay", value: $viewModel.delay)
+                Knob(text: "reverb", value: $viewModel.reverb)
             }
         }
         .padding()
