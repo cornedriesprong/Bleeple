@@ -1,4 +1,5 @@
 [workspace]
 members = [
-  "cp3-dsp"
+  "cp3_dsp", 
+  "dsp_tester"
 ]
