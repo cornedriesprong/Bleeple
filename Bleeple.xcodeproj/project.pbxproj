@@ -12,9 +12,9 @@
 		971102782C516E0400A649F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 971102772C516E0400A649F3 /* Assets.xcassets */; };
 		9711027C2C516E0400A649F3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9711027B2C516E0400A649F3 /* Preview Assets.xcassets */; };
 		971102A72C5170C300A649F3 /* AudioEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971102A62C5170C300A649F3 /* AudioEngine.swift */; };
-		973E7E8B2C6C90DF0004ECCB /* libcp3_dsp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 973E7E8A2C6C90DF0004ECCB /* libcp3_dsp.a */; };
 		9796B3CA2C72012300E17C6A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9796B3C92C72012300E17C6A /* Constants.swift */; };
 		97AA01E32C712BD400AD80B0 /* MainViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97AA01E22C712BD400AD80B0 /* MainViewModelTests.swift */; };
+		97B4E0C42C78DAB2008791DF /* libcp3_dsp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 97B4E0C32C78DAB2008791DF /* libcp3_dsp.a */; };
 		97C1F6D72C6E7F62007A2687 /* XYPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C1F6D62C6E7F62007A2687 /* XYPad.swift */; };
 		97C2BD312C73204500EE05C8 /* TapGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C2BD302C73204500EE05C8 /* TapGrid.swift */; };
 		97C2BD372C738A7500EE05C8 /* CP3Music in Frameworks */ = {isa = PBXBuildFile; productRef = 97C2BD362C738A7500EE05C8 /* CP3Music */; };
@@ -47,10 +47,11 @@
 		971102812C516E0500A649F3 /* BleepleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BleepleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		971102A22C51707400A649F3 /* Bleeple-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bleeple-Bridging-Header.h"; sourceTree = "<group>"; };
 		971102A62C5170C300A649F3 /* AudioEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioEngine.swift; sourceTree = "<group>"; };
-		973E7E892C6C90630004ECCB /* cp3_dsp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = cp3_dsp.h; path = "cp3-dsp/cp3_dsp.h"; sourceTree = SOURCE_ROOT; };
 		973E7E8A2C6C90DF0004ECCB /* libcp3_dsp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcp3_dsp.a; path = target/debug/libcp3_dsp.a; sourceTree = "<group>"; };
 		9796B3C92C72012300E17C6A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		97AA01E22C712BD400AD80B0 /* MainViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModelTests.swift; sourceTree = "<group>"; };
+		97B4E0C22C78D9BC008791DF /* cp3_dsp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = cp3_dsp.h; path = cp3_dsp/cp3_dsp.h; sourceTree = SOURCE_ROOT; };
+		97B4E0C32C78DAB2008791DF /* libcp3_dsp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcp3_dsp.a; path = target/release/libcp3_dsp.a; sourceTree = "<group>"; };
 		97C1F6D62C6E7F62007A2687 /* XYPad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XYPad.swift; sourceTree = "<group>"; };
 		97C2BD302C73204500EE05C8 /* TapGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapGrid.swift; sourceTree = "<group>"; };
 		97C2BD3B2C748C8800EE05C8 /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
@@ -67,7 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				973E7E8B2C6C90DF0004ECCB /* libcp3_dsp.a in Frameworks */,
+				97B4E0C42C78DAB2008791DF /* libcp3_dsp.a in Frameworks */,
 				97C2BD372C738A7500EE05C8 /* CP3Music in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -110,7 +111,7 @@
 				9796B3C92C72012300E17C6A /* Constants.swift */,
 				971102A62C5170C300A649F3 /* AudioEngine.swift */,
 				97CA19FF2C648C9B006BD4E8 /* EnvironmentValues.swift */,
-				973E7E892C6C90630004ECCB /* cp3_dsp.h */,
+				97B4E0C22C78D9BC008791DF /* cp3_dsp.h */,
 				971102772C516E0400A649F3 /* Assets.xcassets */,
 				971102792C516E0400A649F3 /* Bleeple.entitlements */,
 				9711027A2C516E0400A649F3 /* Preview Content */,
@@ -138,6 +139,7 @@
 		9711029E2C516F1C00A649F3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				97B4E0C32C78DAB2008791DF /* libcp3_dsp.a */,
 				973E7E8A2C6C90DF0004ECCB /* libcp3_dsp.a */,
 			);
 			name = Frameworks;
@@ -197,7 +199,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 971102952C516E0500A649F3 /* Build configuration list for PBXNativeTarget "Bleeple" */;
 			buildPhases = (
-				973E7E882C6C8C920004ECCB /* Build Rust library */,
+				97B4E0C52C7B8CEF008791DF /* build Rust library */,
 				9711026C2C516E0300A649F3 /* Sources */,
 				9711026D2C516E0300A649F3 /* Frameworks */,
 				9711026E2C516E0300A649F3 /* Resources */,
@@ -294,8 +296,9 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		973E7E882C6C8C920004ECCB /* Build Rust library */ = {
+		97B4E0C52C7B8CEF008791DF /* build Rust library */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -303,14 +306,14 @@
 			);
 			inputPaths = (
 			);
-			name = "Build Rust library";
+			name = "build Rust library";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#!/bin/zsh\n\n# Ensure the PATH includes the directory where cbindgen is installed\nexport PATH=\"/opt/homebrew/bin:$HOME/.cargo/bin:$PATH\"\n\n# Run the compile-library.sh script\necho \"Running compile-library.sh script...\"\nzsh /${PROJECT_DIR}/bin/compile-library.sh cp3-dsp $buildvariant\n\n# Navigate to the cp3-dsp directory\necho \"Changing directory to cp3-dsp...\"\ncd /${PROJECT_DIR}/cp3-dsp || { echo \"Failed to change directory to cp3-dsp\"; exit 1; }\n\n# Ensure Cargo.toml exists\nif [ ! -f Cargo.toml ]; then\n  echo \"Cargo.toml not found in cp3-dsp directory\"\n  exit 1\nfi\n\n# Run cargo metadata to check if the Cargo.toml is valid\necho \"Running cargo metadata...\"\ncargo metadata || { echo \"cargo metadata failed\"; exit 1; }\n\n# Ensure cbindgen.toml exists\nif [ ! -f cbindgen.toml ]; then\n  echo \"cbindgen.toml not found in cp3-dsp directory\"\n  exit 1\nfi\n\n# Run cbindgen to generate the header file\necho \"Running cbindgen...\"\ncbindgen --config cbindgen.toml --output cp3_dsp.h || { echo \"cbindgen failed\"; exit 1; }\n\necho \"cbindgen completed successfully\"\n";
+			shellScript = "zsh /${PROJECT_DIR}/bin/compile-library.sh cp3_dsp $buildvariant\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -499,6 +502,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/target/debug",
+					"$(PROJECT_DIR)/target/release",
 				);
 				"LIBRARY_SEARCH_PATHS[sdk=iphoneos*][arch=arm64]" = "$(PROJECT_DIR)/target/aarch64-apple-ios/debug";
 				"LIBRARY_SEARCH_PATHS[sdk=iphonesimulator*][arch=arm64]" = "$(PROJECT_DIR)/target/aarch64-apple-ios-sim/debug";
@@ -546,7 +550,10 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/target/debug";
+				LIBRARY_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/target/debug",
+					"$(PROJECT_DIR)/target/release",
+				);
 				"LIBRARY_SEARCH_PATHS[sdk=iphoneos*][arch=arm64]" = "$(PROJECT_DIR)/target/aarch64-apple-ios/release";
 				"LIBRARY_SEARCH_PATHS[sdk=iphonesimulator*][arch=arm64]" = "$(PROJECT_DIR)/target/aarch64-apple-ios-sim/release";
 				"LIBRARY_SEARCH_PATHS[sdk=iphonesimulator*][arch=x86_64]" = "$(PROJECT_DIR)/target/x86_64-apple-ios/release";
