@@ -38,7 +38,7 @@ struct TapGrid: View {
 
                         ZStack {
                             Rectangle()
-                                .fill(color.opacity(opacity))
+                                .fill(color.gradient.opacity(opacity))
                                 .padding(0.5)
                                 .animation(.easeInOut, value: viewModel.activePitches)
                                 .overlay(alignment: .topLeading) {

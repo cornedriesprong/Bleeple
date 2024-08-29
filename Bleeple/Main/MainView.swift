@@ -119,7 +119,7 @@ struct MainView: View {
                     Text("\(index + 1)")
                         .foregroundColor(isSelected ? .black : colors[index])
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .background(colors[index].opacity(isSelected ? 1.0 : 0.1))
+                        .background(colors[index].gradient.opacity(isSelected ? 1.0 : 0.1))
                 }
             }
         }
