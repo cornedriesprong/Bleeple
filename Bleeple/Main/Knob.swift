@@ -5,16 +5,14 @@
 //  Created by Corné on 8/25/24.
 //
 
-import Foundation
+import SwiftUI
 
 struct Knob: View {
     @Environment(\.color) private var color
     let text: String
     @Binding var value: Double
-    let defaultValue = 0.5
     
-    private let offset = 30.0
-    private let angleOffset = 0.45
+    private let defaultValue = 0.5
     private let thickness = 6.0
     
     @State private var isDragging = false

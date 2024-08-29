@@ -9,49 +9,60 @@ import AVFoundation
 import Foundation
 
 final class AudioEngine {
-    
     // MARK: - Properties
-    
-    let engine: OpaquePointer
-    var audioEngine = AVAudioEngine()
-    var sourceNode: AVAudioSourceNode?
-    var format: AVAudioFormat
-    
+
+    private var engine: OpaquePointer
+    private var audioEngine = AVAudioEngine()
+    private var sourceNode: AVAudioSourceNode?
+    private var format: AVAudioFormat
+    private var sampleRate = AVAudioSession.sharedInstance().sampleRate
+
     // MARK: - Initialization
 
     init() {
-        engine = engine_init()
+        engine = engine_init(Float(sampleRate))
         format = audioEngine.outputNode.outputFormat(forBus: 0)
 
+        configureAudioSession()
         setupAudioEngine()
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleRouteChange),
+            name: AVAudioSession.routeChangeNotification,
+            object: nil
+        )
     }
-    
 
     deinit {
         engine_free(engine)
     }
-    
+
     // MARK: - Public methods
-    
-    func noteOn(pitch: Int8, velocity: Int8, param1: Float, param2: Float) {
-        note_on(engine, pitch, velocity, param1, param2)
-    }
-    
-    func noteOff(pitch: Int8) {
-        note_off(engine, pitch)
-    }
-    
-    func setSound(_ sound: Int8) {
-        set_sound(engine, sound)
-    }
-    
-    func setParameter(_ parameter: Int8, to value: Float) {
-        set_parameter(parameter, value)
+
+    func setIsPlaying(_ isPlaying: Bool) {
+        set_play_pause(engine, isPlaying)
     }
 
-    func addEvent(step: Int, pitch: Int8, duration: Float, cutoff: Float, q: Float) {
-        let beatTime: Float = Float(step) / 4.0
-        let pitch: Int8 = Int8(pitch)
+    func noteOn(pitch: Int8, velocity: Int8, track: Int8, param1: Float, param2: Float) {
+        note_on(engine, pitch, velocity, track, param1, param2)
+    }
+
+    func noteOff(pitch: Int8, track: Int8) {
+        note_off(engine, pitch, track)
+    }
+
+    func setSound(_ sound: Int8, track: Int8) {
+        set_sound(engine, sound, track)
+    }
+
+    func setParameter(_ parameter: Int8, value: Float, track: Int8) {
+        set_parameter(parameter, value, track)
+    }
+
+    func addEvent(step: Int, pitch: Int8, duration: Float, track: Int8, cutoff: Float, q: Float) {
+        let beatTime = Float(step) / 4.0
+        let pitch = Int8(pitch)
         let velocity: Int8 = 100
 
         add_event(
@@ -59,15 +70,16 @@ final class AudioEngine {
             pitch,
             velocity,
             duration,
+            track,
             cutoff,
             q
         )
     }
-    
+
     func clearEvents() {
         clear_events()
     }
-    
+
     // MARK: - Private methods
 
     private func setupAudioEngine() {
@@ -110,6 +122,27 @@ final class AudioEngine {
             try audioEngine.start()
         } catch {
             print("Error starting the audio engine: \(error)")
+        }
+    }
+
+    private func configureAudioSession() {
+        let audioSession = AVAudioSession.sharedInstance()
+        do {
+            try audioSession.setCategory(.playback, mode: .default, options: [])
+            try audioSession.setActive(true)
+        } catch {
+            print("Failed to set audio session category and activate it: \(error)")
+        }
+    }
+
+    @objc private func handleRouteChange(notification: Notification) {
+        guard let userInfo = notification.userInfo,
+              let reasonValue = userInfo[AVAudioSessionRouteChangeReasonKey] as? UInt,
+              let reason = AVAudioSession.RouteChangeReason(rawValue: reasonValue) else { return }
+
+        if reason == .categoryChange || reason == .newDeviceAvailable || reason == .oldDeviceUnavailable {
+            // reinitialize engine if audio route changed (sample rate might have changed)
+            self.engine = engine_init(Float(sampleRate))
         }
     }
 }

@@ -9,7 +9,7 @@ import SwiftUI
 import CP3Music
 
 struct ColorTheme: EnvironmentKey {
-    static let defaultValue: Color = .red
+    static let defaultValue: Color = .cp3Red
 }
 
 struct Scale: EnvironmentKey {

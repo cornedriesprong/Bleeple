@@ -121,7 +121,11 @@ struct PianoRoll: View {
                   let location = value.location
                   let step = Double(Int(location.x / gridSize.width))
                   let pitch = pitchCount - Int8(location.y / gridSize.height)
-                  let event = Event(pitch: Int8(pitch), start: step)
+                  let event = Event(
+                     pitch: Int8(pitch),
+                     start: step,
+                     track: Int8(viewModel.selectedTrack)
+                  )
                   viewModel.addEvent(event)
                }
             }

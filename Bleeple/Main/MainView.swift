@@ -7,6 +7,21 @@
 
 import SwiftUI
 
+let colors: [Color] = [
+    .cp3Red,
+    .cp3Yellow,
+    .cp3Turquoise,
+    .cp3Magenta,
+    .cp3Ocean,
+    .cp3Lila,
+    .cp3Blue,
+    .cp3Lime,
+    .cp3Cyan,
+    .cp3Orange,
+    .cp3Purple,
+    .cp3Green,
+]
+
 struct MainView: View {
     // MARK: - Types
     
@@ -16,9 +31,7 @@ struct MainView: View {
     
     // MARK: - Properties
     
-    @Environment(\.color) private var color
     @State private var viewModel = ViewModel.shared
-    @State private var isPlaying = false
     @State private var mode: Mode = .grid
     @State private var isShiftPressed = false
     
@@ -42,8 +55,8 @@ struct MainView: View {
                 print("randomize")
             }
             
-            TopButton(imageName: isPlaying ? "stop.fill" : "play.fill") {
-                isPlaying.toggle()
+            TopButton(imageName: viewModel.isPlaying ? "stop.fill" : "play.fill") {
+                viewModel.isPlaying.toggle()
             }
             .keyboardShortcut(.space)
             
@@ -95,10 +108,27 @@ struct MainView: View {
     var xy: some View {
         XYPad(viewModel: $viewModel)
     }
+    
+    var trackSelection: some View {
+        HStack(spacing: 0) {
+            ForEach(0..<6) { index in
+                Button {
+                    viewModel.selectedTrack = index
+                } label: {
+                    let isSelected = index == viewModel.selectedTrack
+                    Text("\(index + 1)")
+                        .foregroundColor(isSelected ? .black : colors[index])
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .background(colors[index].opacity(isSelected ? 1.0 : 0.1))
+                }
+            }
+        }
+        .frame(height: 44)
+    }
 
     var body: some View {
         ZStack {
-            VStack {
+            VStack(spacing: 0) {
                 topBar
                 
                 parameterSliders
@@ -120,8 +150,11 @@ struct MainView: View {
                 case .xy:
                     xy
                 }
+                
+                trackSelection
             }
         }
+        .environment(\.color, colors[viewModel.selectedTrack])
 #if canImport(AppKit)
         .onAppear {
             addKeyboardListeners()

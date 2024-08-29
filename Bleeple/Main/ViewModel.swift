@@ -37,36 +37,47 @@ extension MainView {
                 dampingSubject.send(Float(damping))
             }
         }
-        private let dampingSubject = PassthroughSubject<Float, Never>()
+        @ObservationIgnored private let dampingSubject = PassthroughSubject<Float, Never>()
 
         var tone: Double = 0.5 {
             didSet {
                 toneSubject.send(Float(tone))
             }
         }
-        private let toneSubject = PassthroughSubject<Float, Never>()
+        @ObservationIgnored private let toneSubject = PassthroughSubject<Float, Never>()
 
         var delay: Double = 0.5 {
             didSet {
                 delaySubject.send(Float(delay))
             }
         }
-        private let delaySubject = PassthroughSubject<Float, Never>()
+        @ObservationIgnored private let delaySubject = PassthroughSubject<Float, Never>()
 
         var reverb: Double = 0.5 {
             didSet {
                 reverbSubject.send(Float(reverb))
             }
         }
-        private let reverbSubject = PassthroughSubject<Float, Never>()
+        @ObservationIgnored private let reverbSubject = PassthroughSubject<Float, Never>()
 
         var selectedSound: PlaitsEngine = .virtualAnalog1 {
             didSet {
-                engine.setSound(Int8(selectedSound.rawValue))
+                engine.setSound(
+                    Int8(selectedSound.rawValue),
+                    track: Int8(
+                        selectedTrack
+                    )
+                )
             }
         }
 
-        var playbackPosition: Double = 0.0
+        var isPlaying = true {
+            didSet {
+                engine.setIsPlaying(isPlaying)
+            }
+        }
+        var selectedTrack = 1
+        var playbackPosition = 0.0
         var activePitches = Set<Int8>()
 
         @ObservationIgnored var playingIndices: [Int] = []
@@ -88,14 +99,33 @@ extension MainView {
         
         func noteOn(_ pitch: Int) {
             let pitch = Int8(pitch)
+            engine.noteOn(
+                pitch: pitch,
+                velocity: 100,
+                track: Int8(selectedTrack),
+                param1: 0.2,
+                param2: 0.5
+            )
+            
+            guard isPlaying else { return }
             let quantized = round(playbackPosition * 4)
-            let event = Event(pitch: pitch, start: quantized, duration: .infinity)
+            let event = Event(
+                pitch: pitch,
+                start: quantized,
+                duration: .infinity,
+                track: Int8(selectedTrack)
+            )
             heldEvents.insert(event)
         
-            engine.noteOn(pitch: pitch, velocity: 100, param1: 0.2, param2: 0.5)
         }
         
         func noteOff(_ pitch: Int) {
+            engine.noteOff(
+                pitch: Int8(pitch),
+                track: Int8(selectedTrack)
+            )
+
+            guard isPlaying else { return }
             let quantized = ceil(playbackPosition * 4)
             for var event in heldEvents where event.pitch == pitch {
                 // set actual event duration, now that we have the note off time
@@ -103,8 +133,6 @@ extension MainView {
                 push(.insert(event: event))
                 heldEvents.remove(event)
             }
-            
-            engine.noteOff(pitch: Int8(pitch))
         }
 
         func addEvent(_ event: Event) {
@@ -199,11 +227,13 @@ extension MainView {
 
         private func updateEngine() {
             engine.clearEvents()
+            
             for event in events {
                 engine.addEvent(
                     step: Int(event.start),
                     pitch: event.pitch,
                     duration: Float(event.duration / 4.0),
+                    track: event.track,
                     cutoff: Float(event.cutoff),
                     q: Float(event.q)
                 )
@@ -214,28 +244,48 @@ extension MainView {
             dampingSubject
                 .throttle(for: .seconds(0.2), scheduler: DispatchQueue.main, latest: true)
                 .sink { [weak self] value in
-                    self?.engine.setParameter(0, to: Float(value))
+                    guard let self else { return }
+                    engine.setParameter(
+                        0,
+                        value: Float(value),
+                        track: Int8(selectedTrack)
+                    )
                 }
                 .store(in: &cancellables)
             
             toneSubject
                 .throttle(for: .seconds(0.2), scheduler: DispatchQueue.main, latest: true)
                 .sink { [weak self] value in
-                    self?.engine.setParameter(1, to: Float(value))
+                    guard let self else { return }
+                    engine.setParameter(
+                        1,
+                        value: Float(value),
+                        track: Int8(selectedTrack)
+                    )
                 }
                 .store(in: &cancellables)
             
             delaySubject
                 .throttle(for: .seconds(0.2), scheduler: DispatchQueue.main, latest: true)
                 .sink { [weak self] value in
-                    self?.engine.setParameter(2, to: Float(value))
+                    guard let self else { return }
+                    engine.setParameter(
+                        2,
+                        value: Float(value),
+                        track: Int8(selectedTrack)
+                    )
                 }
                 .store(in: &cancellables)
             
             reverbSubject
                 .throttle(for: .seconds(0.2), scheduler: DispatchQueue.main, latest: true)
                 .sink { [weak self] value in
-                    self?.engine.setParameter(3, to: Float(value))
+                    guard let self else { return }
+                    engine.setParameter(
+                        3,
+                        value: Float(value),
+                        track: Int8(selectedTrack)
+                    )
                 }
                 .store(in: &cancellables)
         }
@@ -247,8 +297,9 @@ extension MainView {
                 }
             }
             
-            set_note_played_callback { noteOn, pitch in
+            set_note_played_callback { noteOn, pitch, track in
                 DispatchQueue.main.async {
+                    guard track == ViewModel.shared.selectedTrack else { return }
                     if noteOn {
                         ViewModel.shared.activePitches.insert(pitch)
                     } else {

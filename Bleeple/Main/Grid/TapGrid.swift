@@ -9,7 +9,7 @@ import CP3Music
 import SwiftUI
 
 struct TapGrid: View {
-    private static let gridLength = 7
+    private static let gridLength = 4
     private static let spacing = 0.5
 
     @Environment(\.color) private var color
@@ -29,7 +29,8 @@ struct TapGrid: View {
                 GridRow {
                     ForEach(0 ..< TapGrid.gridLength) { column in
                         let pitchCount = TapGrid.gridLength * TapGrid.gridLength
-                        let pitch = pitchCount - ((row * TapGrid.gridLength) - column) + 20
+                        let offset = 32
+                        let pitch = pitchCount - ((row * TapGrid.gridLength) - column) + offset
                         let isInScale = scale.pitches.map { Int($0.rawValue) }.contains(pitch % 12)
                         let isTapped = tapped[row][column]
                         let isActive = viewModel.activePitches.contains(Int8(pitch))
