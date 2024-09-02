@@ -9,12 +9,13 @@ import SwiftUI
 
 struct Knob: View {
     @Environment(\.color) private var color
-    @Binding var value: Double
-    let range: Range<Double>
-    let defaultValue: Double
-    let text: String
-    let curve: Int
     
+    @Binding var value: Double
+    
+    private let range: Range<Double>
+    private let defaultValue: Double
+    private let text: String
+    private let curve: Int
     private let thickness = 6.0
     
     @State private var internalValue: Double
