@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		970A08A62C85A79400BFCF59 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970A08A52C85A79400BFCF59 /* Utils.swift */; };
 		971102742C516E0300A649F3 /* BleepleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971102732C516E0300A649F3 /* BleepleApp.swift */; };
 		971102762C516E0300A649F3 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971102752C516E0300A649F3 /* MainView.swift */; };
 		971102782C516E0400A649F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 971102772C516E0400A649F3 /* Assets.xcassets */; };
@@ -22,10 +23,8 @@
 		97C2BD3C2C748C8800EE05C8 /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C2BD3B2C748C8800EE05C8 /* EventView.swift */; };
 		97CA19FE2C648A9C006BD4E8 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CA19FD2C648A9C006BD4E8 /* ViewModel.swift */; };
 		97CA1A002C648C9B006BD4E8 /* EnvironmentValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CA19FF2C648C9B006BD4E8 /* EnvironmentValues.swift */; };
-		97CA1A022C648CB6006BD4E8 /* TopButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CA1A012C648CB6006BD4E8 /* TopButton.swift */; };
 		97CA1A062C648EBB006BD4E8 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CA1A052C648EBB006BD4E8 /* Event.swift */; };
 		97CA1A082C649423006BD4E8 /* PianoRoll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CA1A072C649423006BD4E8 /* PianoRoll.swift */; };
-		97DC5F8D2C76CDFC0042A623 /* PlaitsEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DC5F8C2C76CDFC0042A623 /* PlaitsEngine.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		970A08A52C85A79400BFCF59 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		971102702C516E0300A649F3 /* Bleeple.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bleeple.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		971102732C516E0300A649F3 /* BleepleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleepleApp.swift; sourceTree = "<group>"; };
 		971102752C516E0300A649F3 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -59,10 +59,8 @@
 		97C2BD3B2C748C8800EE05C8 /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
 		97CA19FD2C648A9C006BD4E8 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		97CA19FF2C648C9B006BD4E8 /* EnvironmentValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentValues.swift; sourceTree = "<group>"; };
-		97CA1A012C648CB6006BD4E8 /* TopButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopButton.swift; sourceTree = "<group>"; };
 		97CA1A052C648EBB006BD4E8 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		97CA1A072C649423006BD4E8 /* PianoRoll.swift */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.swift; path = PianoRoll.swift; sourceTree = "<group>"; };
-		97DC5F8C2C76CDFC0042A623 /* PlaitsEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaitsEngine.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +109,7 @@
 				97C2BD382C738FD000EE05C8 /* Main */,
 				971102732C516E0300A649F3 /* BleepleApp.swift */,
 				9796B3C92C72012300E17C6A /* Constants.swift */,
+				970A08A52C85A79400BFCF59 /* Utils.swift */,
 				971102A62C5170C300A649F3 /* AudioEngine.swift */,
 				97CA19FF2C648C9B006BD4E8 /* EnvironmentValues.swift */,
 				97B4E0C22C78D9BC008791DF /* cp3_dsp.h */,
@@ -172,7 +171,6 @@
 				97C2BD392C73905300EE05C8 /* XY */,
 				97CA19FD2C648A9C006BD4E8 /* ViewModel.swift */,
 				971102752C516E0300A649F3 /* MainView.swift */,
-				97CA1A012C648CB6006BD4E8 /* TopButton.swift */,
 				973109F72C7B9AB9000BFE99 /* Knob.swift */,
 			);
 			path = Main;
@@ -190,7 +188,6 @@
 			isa = PBXGroup;
 			children = (
 				97CA1A052C648EBB006BD4E8 /* Event.swift */,
-				97DC5F8C2C76CDFC0042A623 /* PlaitsEngine.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -330,13 +327,12 @@
 				971102A72C5170C300A649F3 /* AudioEngine.swift in Sources */,
 				97C2BD3C2C748C8800EE05C8 /* EventView.swift in Sources */,
 				97CA1A002C648C9B006BD4E8 /* EnvironmentValues.swift in Sources */,
+				970A08A62C85A79400BFCF59 /* Utils.swift in Sources */,
 				971102762C516E0300A649F3 /* MainView.swift in Sources */,
-				97DC5F8D2C76CDFC0042A623 /* PlaitsEngine.swift in Sources */,
 				971102742C516E0300A649F3 /* BleepleApp.swift in Sources */,
 				97CA19FE2C648A9C006BD4E8 /* ViewModel.swift in Sources */,
 				97C2BD312C73204500EE05C8 /* TapGrid.swift in Sources */,
 				97C1F6D72C6E7F62007A2687 /* XYPad.swift in Sources */,
-				97CA1A022C648CB6006BD4E8 /* TopButton.swift in Sources */,
 				97CA1A082C649423006BD4E8 /* PianoRoll.swift in Sources */,
 				973109F82C7B9AB9000BFE99 /* Knob.swift in Sources */,
 			);

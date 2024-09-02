@@ -16,10 +16,6 @@ struct Scale: EnvironmentKey {
     static let defaultValue = CP3Music.Scale(CP3Music.Key(.c), .major)
 }
 
-struct ShiftPressed: EnvironmentKey {
-    static let defaultValue: Bool = false
-}
-
 extension EnvironmentValues {
     // TODO: use @Entry macro
     var color: Color {
@@ -30,10 +26,5 @@ extension EnvironmentValues {
     var scale: CP3Music.Scale {
         get { self[Scale.self] }
         set { self[Scale.self] = newValue }
-    }
-    
-    var isShiftPressed: Bool {
-        get { self[ShiftPressed.self] }
-        set { self[ShiftPressed.self] = newValue }
     }
 }

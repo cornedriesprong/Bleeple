@@ -10,73 +10,79 @@ import SwiftUI
 extension MainView {
     @Observable final class ViewModel {
         // MARK: - Types
-        
+
         static let shared = ViewModel()
-        
+
         enum Parameter: Int {
             case cutoff
             case q
         }
-        
+
         private enum Command {
             case insert(event: Event)
             case delete(event: Event)
             case transaction(commands: [Command])
         }
-        
+
         // MARK: - Properties
-        
+
         var events = [Event]() {
             didSet {
                 updateEngine()
             }
         }
-        
-        var damping: Double = 0.5 {
+
+        var carrierFreq: Double = 440.0 {
             didSet {
-                dampingSubject.send(Float(damping))
+                setParameter(index: 0, value: carrierFreq)
             }
         }
-        @ObservationIgnored private let dampingSubject = PassthroughSubject<Float, Never>()
 
-        var tone: Double = 0.5 {
+        var modFreq: Double = 660.0 {
             didSet {
-                toneSubject.send(Float(tone))
+                setParameter(index: 1, value: modFreq)
             }
         }
-        @ObservationIgnored private let toneSubject = PassthroughSubject<Float, Never>()
 
-        var delay: Double = 0.5 {
+        var cutoff: Double = 5000.0 {
             didSet {
-                delaySubject.send(Float(delay))
+                setParameter(index: 2, value: cutoff)
             }
         }
-        @ObservationIgnored private let delaySubject = PassthroughSubject<Float, Never>()
 
-        var reverb: Double = 0.5 {
+        var resonance: Double = 0.717 {
             didSet {
-                reverbSubject.send(Float(reverb))
+                setParameter(index: 3, value: resonance)
             }
         }
-        @ObservationIgnored private let reverbSubject = PassthroughSubject<Float, Never>()
 
-        var selectedSound: PlaitsEngine = .virtualAnalog1 {
+        var fmAmount: Double = 0.5 {
             didSet {
-                engine.setSound(
-                    Int8(selectedSound.rawValue),
-                    track: Int8(
-                        selectedTrack
-                    )
-                )
+                setParameter(index: 4, value: fmAmount)
+            }
+        }
+
+        var modAmount: Double = 0.5 {
+            didSet {
+                setParameter(index: 5, value: modAmount)
             }
         }
 
         var isPlaying = true {
             didSet {
                 engine.setIsPlaying(isPlaying)
+                if !isPlaying {
+                    activePitches.removeAll()
+                }
             }
         }
-        var selectedTrack = 1
+
+        var selectedTrack = 1 {
+            didSet {
+                activePitches.removeAll()
+            }
+        }
+
         var playbackPosition = 0.0
         var activePitches = Set<Int8>()
 
@@ -89,14 +95,13 @@ extension MainView {
         private var cancellables = Set<AnyCancellable>()
 
         // MARK: - Initialization
-           
+
         private init() {
-            setupParameterPublishers()
             setupCallbacks()
         }
-        
+
         // MARK: - Public methods
-        
+
         func noteOn(_ pitch: Int) {
             let pitch = Int8(pitch)
             engine.noteOn(
@@ -106,7 +111,7 @@ extension MainView {
                 param1: 0.2,
                 param2: 0.5
             )
-            
+
             guard isPlaying else { return }
             let quantized = round(playbackPosition * 4)
             let event = Event(
@@ -116,9 +121,8 @@ extension MainView {
                 track: Int8(selectedTrack)
             )
             heldEvents.insert(event)
-        
         }
-        
+
         func noteOff(_ pitch: Int) {
             engine.noteOff(
                 pitch: Int8(pitch),
@@ -138,17 +142,17 @@ extension MainView {
         func addEvent(_ event: Event) {
             push(.insert(event: event))
         }
-        
+
         func removeEvent(_ event: Event) {
             push(.delete(event: event))
         }
-        
+
         func deselectAll() {
             for index in events.indices {
                 events[index].isSelected = false
             }
         }
-        
+
         func undo() {
             if position >= 0 {
                 let command = history[position]
@@ -156,7 +160,7 @@ extension MainView {
                 position -= 1
             }
         }
-        
+
         func redo() {
             if position < history.count - 1 {
                 position += 1
@@ -164,18 +168,18 @@ extension MainView {
                 apply(command)
             }
         }
-        
+
         func clear() {
             let selectedEvents = events.filter { $0.isSelected }
             let eventsToDelete = selectedEvents.isEmpty ? events : selectedEvents
             let commands: [Command] = eventsToDelete.map { .delete(event: $0) }
             push(.transaction(commands: commands))
-           
+
             // clear engine here for now
             engine.clearEvents()
         }
 
-        func setParameter(_ parameter: Parameter, value: Double) {
+        func setParameter(_ parameter: Parameter, value: Double, curve: Double) {
             for (index, event) in events.enumerated() where event.isSelected == true {
                 switch parameter {
                 case .cutoff:
@@ -185,9 +189,9 @@ extension MainView {
                 }
             }
         }
-        
+
         // MARK: - Private methods
-        
+
         private func push(_ command: Command) {
             history.removeSubrange((position + 1)...)
             history.append(command)
@@ -202,22 +206,22 @@ extension MainView {
 
             case .delete(let event):
                 events.removeAll { $0 == event }
-                
+
             case .transaction(let commands):
                 for command in commands {
                     apply(command)
                 }
             }
         }
-        
+
         private func applyReversed(_ command: Command) {
             switch command {
             case .insert(let event):
                 events.removeAll { $0 == event }
-                
+
             case .delete(let event):
                 events.append(event)
-                
+
             case .transaction(let commands):
                 for command in commands.reversed() {
                     applyReversed(command)
@@ -227,7 +231,7 @@ extension MainView {
 
         private func updateEngine() {
             engine.clearEvents()
-            
+
             for event in events {
                 engine.addEvent(
                     step: Int(event.start),
@@ -239,64 +243,22 @@ extension MainView {
                 )
             }
         }
-        
-        private func setupParameterPublishers() {
-            dampingSubject
-                .throttle(for: .seconds(0.2), scheduler: DispatchQueue.main, latest: true)
-                .sink { [weak self] value in
-                    guard let self else { return }
-                    engine.setParameter(
-                        0,
-                        value: Float(value),
-                        track: Int8(selectedTrack)
-                    )
-                }
-                .store(in: &cancellables)
-            
-            toneSubject
-                .throttle(for: .seconds(0.2), scheduler: DispatchQueue.main, latest: true)
-                .sink { [weak self] value in
-                    guard let self else { return }
-                    engine.setParameter(
-                        1,
-                        value: Float(value),
-                        track: Int8(selectedTrack)
-                    )
-                }
-                .store(in: &cancellables)
-            
-            delaySubject
-                .throttle(for: .seconds(0.2), scheduler: DispatchQueue.main, latest: true)
-                .sink { [weak self] value in
-                    guard let self else { return }
-                    engine.setParameter(
-                        2,
-                        value: Float(value),
-                        track: Int8(selectedTrack)
-                    )
-                }
-                .store(in: &cancellables)
-            
-            reverbSubject
-                .throttle(for: .seconds(0.2), scheduler: DispatchQueue.main, latest: true)
-                .sink { [weak self] value in
-                    guard let self else { return }
-                    engine.setParameter(
-                        3,
-                        value: Float(value),
-                        track: Int8(selectedTrack)
-                    )
-                }
-                .store(in: &cancellables)
+
+        private func setParameter(index: Int, value: Double) {
+            engine.setParameter(
+                Int8(index),
+                value: Float(value),
+                track: Int8(selectedTrack)
+            )
         }
-        
+
         private func setupCallbacks() {
             set_playback_progress_callback { progress in
                 DispatchQueue.main.async {
                     ViewModel.shared.playbackPosition = Double(progress)
                 }
             }
-            
+
             set_note_played_callback { noteOn, pitch, track in
                 DispatchQueue.main.async {
                     guard track == ViewModel.shared.selectedTrack else { return }

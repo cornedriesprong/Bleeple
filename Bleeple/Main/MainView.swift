@@ -29,61 +29,148 @@ struct MainView: View {
         case roll, grid, xy
     }
     
+    enum Section: Int, CaseIterable, CustomStringConvertible {
+        case seq, dco, filter, arp, fx, config
+        
+        var description: String {
+            switch self {
+            case .seq: "seq"
+            case .dco: "dco"
+            case .filter: "filter"
+            case .arp: "arp"
+            case .fx: "fx"
+            case .config: "config"
+            }
+        }
+    }
+
     // MARK: - Properties
     
     @State private var viewModel = ViewModel.shared
     @State private var mode: Mode = .grid
+    @State private var section: Section = .dco
     @State private var isShiftPressed = false
     
     // MARK: - View
 
     var topBar: some View {
         HStack(spacing: 22) {
-            Picker(selection: $viewModel.selectedSound) {
-                ForEach(PlaitsEngine.allCases.filter { $0.enabled }, id: \.self) {
-                    Text("\($0.description)")
-                }
-            } label: {
-                Text("sound")
-            }
-                         
-            TopButton(imageName: "clear") {
+            Button {
                 viewModel.clear()
+            } label: {
+                Image(systemName: "clear")
             }
             
-            TopButton(imageName: "dice") {
+            Button {
                 print("randomize")
+            } label: {
+                Image(systemName: "dice")
             }
             
-            TopButton(imageName: viewModel.isPlaying ? "stop.fill" : "play.fill") {
+            Button {
                 viewModel.isPlaying.toggle()
+            } label: {
+                Image(systemName: viewModel.isPlaying ? "stop.fill" : "play.fill")
             }
-            .keyboardShortcut(.space)
             
-            TopButton(imageName: "arrow.uturn.backward") {
+            Button {
                 viewModel.undo()
+            } label: {
+                Image(systemName: "arrow.uturn.backward")
             }
             
-            TopButton(imageName: "arrow.uturn.forward") {
+            Button {
                 viewModel.redo()
+            } label: {
+                Image(systemName: "arrow.uturn.forward")
             }
         }
         .padding(.top)
         .padding(.horizontal)
     }
     
-    var parameterSliders: some View {
-        Grid {
-            GridRow {
-                Knob(text: "damping", value: $viewModel.damping)
-                Knob(text: "tone", value: $viewModel.tone)
+    var controls: some View {
+        VStack {
+            HStack(spacing: 20) {
+                ForEach(Section.allCases, id: \.self) { section in
+                    Button {
+                        self.section = section
+                    } label: {
+                        Text(section.description.uppercased())
+                            .opacity(self.section == section ? 1.0 : 0.5)
+                    }
+                }
             }
-            GridRow {
-                Knob(text: "delay", value: $viewModel.delay)
-                Knob(text: "reverb", value: $viewModel.reverb)
+            .padding(.top, 20)
+            .tint(.primary)
+            
+            Group {
+                switch section {
+                case .seq:
+                    EmptyView()
+                case .dco:
+                    Grid {
+                        GridRow {
+                            Knob(
+                                text: "osc1 freq \(Int(viewModel.carrierFreq)) Hz",
+                                value: $viewModel.carrierFreq,
+                                range: 0.0..<10000.0,
+                                defaultValue: 440.0,
+                                curve: 4
+                            )
+                            Knob(
+                                text: "osc2 freq \(Int(viewModel.modFreq)) Hz",
+                                value: $viewModel.modFreq,
+                                range: 0.0..<10000.0,
+                                defaultValue: 660.0,
+                                curve: 4
+                            )
+                        }
+                        GridRow {
+                            Knob(
+                                text: "fm amount \(String(format: "%.2f", viewModel.fmAmount))",
+                                value: $viewModel.fmAmount,
+                                range: 0.0..<1.0,
+                                defaultValue: 0.5
+                            )
+                            Knob(
+                                text: "mod amount \(String(format: "%.2f", viewModel.modAmount))",
+                                value: $viewModel.modAmount,
+                                range: 0.0..<3.0,
+                                defaultValue: 0.5,
+                                curve: 2
+                            )
+                        }
+                    }
+                case .filter:
+                    Grid {
+                        GridRow {
+                            Knob(
+                                text: "cutoff \(Int(viewModel.cutoff)) Hz",
+                                value: $viewModel.cutoff,
+                                range: 50.0..<10000.0,
+                                defaultValue: 5000.0,
+                                curve: 4
+                            )
+                            Knob(
+                                text: "resonance \(String(format: "%.2f", viewModel.resonance))",
+                                value: $viewModel.resonance,
+                                range: 0.0..<10.0,
+                                defaultValue: 0.717
+                            )
+                        }
+                    }
+                case .arp:
+                    EmptyView()
+                case .fx:
+                    EmptyView()
+                case .config:
+                    EmptyView()
+                }
             }
+            
+            .padding()
         }
-        .padding()
     }
     
     var grid: some View {
@@ -111,7 +198,7 @@ struct MainView: View {
     
     var trackSelection: some View {
         HStack(spacing: 0) {
-            ForEach(0..<6) { index in
+            ForEach(0 ..< 6) { index in
                 Button {
                     viewModel.selectedTrack = index
                 } label: {
@@ -119,7 +206,7 @@ struct MainView: View {
                     Text("\(index + 1)")
                         .foregroundColor(isSelected ? .black : colors[index])
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .background(colors[index].gradient.opacity(isSelected ? 1.0 : 0.1))
+                        .background(colors[index].opacity(isSelected ? 1.0 : 0.1).gradient)
                 }
             }
         }
@@ -127,57 +214,41 @@ struct MainView: View {
     }
 
     var body: some View {
-        ZStack {
-            VStack(spacing: 0) {
-                topBar
-                
-                parameterSliders
-                
-                Picker("Mode", selection: $mode) {
-                    ForEach(Mode.allCases, id: \.self) {
-                        Text($0.rawValue)
+        NavigationStack {
+            ZStack {
+                VStack(spacing: 0) {
+                    controls
+                    
+                    Picker("Mode", selection: $mode) {
+                        ForEach(Mode.allCases, id: \.self) {
+                            Text($0.rawValue)
+                        }
                     }
+                    .pickerStyle(.segmented)
+                    .labelsHidden()
+                    .padding()
+                    
+                    switch mode {
+                    case .grid:
+                        grid
+                    case .roll:
+                        roll
+                    case .xy:
+                        xy
+                    }
+                    //                trackSelection
                 }
-                .pickerStyle(.segmented)
-                .labelsHidden()
-                .padding()
-                
-                switch mode {
-                case .grid:
-                    grid
-                case .roll:
-                    roll
-                case .xy:
-                    xy
+            }
+            .environment(\.color, colors[section.rawValue])
+            .toolbarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    topBar
+                        .tint(.primary)
                 }
-                
-                trackSelection
             }
         }
-        .environment(\.color, colors[viewModel.selectedTrack])
-#if canImport(AppKit)
-        .onAppear {
-            addKeyboardListeners()
-        }
-        .onDisappear {
-            removeKeyboardListeners()
-        }
-        .environment(\.isShiftPressed, isShiftPressed)
-#endif
     }
-    
-#if canImport(AppKit)
-    private func addKeyboardListeners() {
-        NSEvent.addLocalMonitorForEvents(matching: [.flagsChanged]) { event in
-            isShiftPressed = event.modifierFlags.contains(.shift)
-            return event
-        }
-    }
-
-    private func removeKeyboardListeners() {
-        NSEvent.removeMonitor(self)
-    }
-#endif
 }
 
 #Preview {

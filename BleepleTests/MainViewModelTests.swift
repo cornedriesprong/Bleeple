@@ -24,13 +24,13 @@ final class MainViewModelTests: XCTestCase {
         XCTAssert(viewModel.events.isEmpty, "Should remain empty after redo with no events")
 
         // Add first event
-        let event1 = Event(pitch: 0, start: 0)
+        let event1 = Event(pitch: 0, start: 0, track: 0)
         viewModel.addEvent(event1)
         XCTAssert(viewModel.events.count == 1, "Should contain one event after adding")
         XCTAssert(viewModel.events.first == event1, "The first event should be event1")
             
         // Add second event
-        let event2 = Event(pitch: 1, start: 1)
+        let event2 = Event(pitch: 1, start: 1, track: 0)
         viewModel.addEvent(event2)
         XCTAssert(viewModel.events.count == 2, "Should contain two events after adding")
         XCTAssert(viewModel.events.last == event2, "The last event should be event2")

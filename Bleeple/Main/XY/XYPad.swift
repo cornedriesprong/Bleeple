@@ -23,15 +23,15 @@ struct XYPad: View {
                             DragGesture()
                                 .onChanged { drag in
                                     let position = getPosition(for: drag.location, in: geometry.size)
-                                    viewModel.damping = position.x / geometry.size.width
-                                    viewModel.tone = position.y / geometry.size.height
+                                    viewModel.cutoff = position.x / geometry.size.width
+                                    viewModel.resonance = position.y / geometry.size.height
                                 }
                         )
                         .contentShape(Rectangle())
                         .onTapGesture { location in
                             let position = getPosition(for: location, in: geometry.size)
-                            viewModel.damping = position.x / geometry.size.width
-                            viewModel.tone = position.y / geometry.size.height
+                            viewModel.cutoff = position.x / geometry.size.width
+                            viewModel.resonance = position.y / geometry.size.height
                         }
 
                     Circle()
@@ -39,8 +39,8 @@ struct XYPad: View {
                         .frame(width: circleSize, height: circleSize)
                         .position(getPosition(in: geometry.size))
                         // TODO: see if we can make this nicer
-                        .animation(.bouncy(duration: 0.5), value: viewModel.damping)
-                        .animation(.bouncy(duration: 0.5), value: viewModel.tone)
+                        .animation(.bouncy(duration: 0.5), value: viewModel.cutoff)
+                        .animation(.bouncy(duration: 0.5), value: viewModel.resonance)
                 }
             }
         }
@@ -48,8 +48,8 @@ struct XYPad: View {
     
     private func getPosition(in size: CGSize) -> CGPoint {
         CGPoint(
-            x: viewModel.damping * size.width,
-            y: viewModel.tone * size.height
+            x: viewModel.cutoff * size.width,
+            y: viewModel.resonance * size.height
         )
     }
 

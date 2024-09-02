@@ -54,7 +54,6 @@ struct PianoRollGrid: Shape {
 
 struct PianoRoll: View {
    @Environment(\.color) private var color
-   @Environment(\.isShiftPressed) private var isShiftPressed
    @Binding var viewModel: MainView.ViewModel
 
    @State private var gridSize = CGSize(width: 33, height: 33)
@@ -174,9 +173,6 @@ struct PianoRoll: View {
             .simultaneousGesture(
                TapGesture()
                   .onEnded {
-                     if !isShiftPressed {
-                        viewModel.deselectAll()
-                     }
                      event.isSelected.toggle()
                   }
             )
