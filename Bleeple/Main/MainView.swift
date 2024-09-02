@@ -23,8 +23,6 @@ let colors: [Color] = [
 ]
 
 struct MainView: View {
-    // MARK: - Types
-    
     enum Mode: String, CaseIterable {
         case roll, grid, xy
     }
@@ -44,15 +42,11 @@ struct MainView: View {
         }
     }
 
-    // MARK: - Properties
-    
     @State private var viewModel = ViewModel.shared
     @State private var mode: Mode = .grid
     @State private var section: Section = .dco
     @State private var isShiftPressed = false
     
-    // MARK: - View
-
     var topBar: some View {
         HStack(spacing: 22) {
             Button {
@@ -198,7 +192,7 @@ struct MainView: View {
     
     var trackSelection: some View {
         HStack(spacing: 0) {
-            ForEach(0 ..< 6) { index in
+            ForEach(0..<6) { index in
                 Button {
                     viewModel.selectedTrack = index
                 } label: {

@@ -9,15 +9,11 @@ import AVFoundation
 import Foundation
 
 final class AudioEngine {
-    // MARK: - Properties
-
     private var engine: OpaquePointer
     private var audioEngine = AVAudioEngine()
     private var sourceNode: AVAudioSourceNode?
     private var format: AVAudioFormat
     private var sampleRate = AVAudioSession.sharedInstance().sampleRate
-
-    // MARK: - Initialization
 
     init() {
         engine = engine_init(Float(sampleRate))
@@ -37,8 +33,6 @@ final class AudioEngine {
     deinit {
         engine_free(engine)
     }
-
-    // MARK: - Public methods
 
     func setIsPlaying(_ isPlaying: Bool) {
         set_play_pause(engine, isPlaying)
@@ -79,8 +73,6 @@ final class AudioEngine {
     func clearEvents() {
         clear_events()
     }
-
-    // MARK: - Private methods
 
     private func setupAudioEngine() {
         let renderBlock: AVAudioSourceNodeRenderBlock = { [weak self] _, timeStamp, frameCount, audioBufferList in
@@ -142,7 +134,7 @@ final class AudioEngine {
 
         if reason == .categoryChange || reason == .newDeviceAvailable || reason == .oldDeviceUnavailable {
             // reinitialize engine if audio route changed (sample rate might have changed)
-            self.engine = engine_init(Float(sampleRate))
+            engine = engine_init(Float(sampleRate))
         }
     }
 }

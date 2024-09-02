@@ -9,8 +9,6 @@ import SwiftUI
 
 extension MainView {
     @Observable final class ViewModel {
-        // MARK: - Types
-
         static let shared = ViewModel()
 
         enum Parameter: Int {
@@ -23,8 +21,6 @@ extension MainView {
             case delete(event: Event)
             case transaction(commands: [Command])
         }
-
-        // MARK: - Properties
 
         var events = [Event]() {
             didSet {
@@ -94,13 +90,9 @@ extension MainView {
         private var position = -1
         private var cancellables = Set<AnyCancellable>()
 
-        // MARK: - Initialization
-
         private init() {
             setupCallbacks()
         }
-
-        // MARK: - Public methods
 
         func noteOn(_ pitch: Int) {
             let pitch = Int8(pitch)
@@ -189,8 +181,6 @@ extension MainView {
                 }
             }
         }
-
-        // MARK: - Private methods
 
         private func push(_ command: Command) {
             history.removeSubrange((position + 1)...)
